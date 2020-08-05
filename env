@@ -1,0 +1,5 @@
+NODE_ENV='production or development mode'
+DATABASE='database connect'
+SECRET_OR_KEY='secret key'
+NODEMAILER_USER='smptmail'
+NODEMAILER_PASS='password'
