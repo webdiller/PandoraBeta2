@@ -16,17 +16,24 @@ class ProfileItem extends Component {
               View Profile
             </Link>
           </div>
+          <div>
+          </div>
           <div className="col-md-4 d-none d-md-block">
             <h4>Платежные системы</h4>
 
-            {/* <ul className="list-group">
-              {profile.skills.slice(0, 4).map((skill, index) => (
-                <li key={index} className="list-group-item">
-                  <i className="fa fa-check pr-1" />
-                  {skill}
-                </li>
-              ))}
-            </ul> */}
+
+            <ul className="list-group">
+              {!!profile.services &&
+                profile.services.map((item, index) => {
+                  {
+                    item.categories.map((subitem, subindex) => (
+                      <span>{subitem}</span>
+                    ))
+                  }
+                }
+                )}
+            </ul>
+
           </div>
         </div>
       </div>
