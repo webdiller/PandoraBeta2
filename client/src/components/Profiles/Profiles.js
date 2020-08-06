@@ -19,13 +19,31 @@ class Profiles extends Component {
 
   showMatchProfiles = (e) => {
     e.preventDefault();
-    const { name } = e.target.elements;
+    const { name, categories } = e.target.elements;
+    // sort by handle
+    // if (!!this.props.profile.profiles) {
+    //   let users = this.props.profile.profiles.find((user) => {
+    //     return user.handle === name.value;
+    //   });
+    //   this.setState({ newUsers: users });
+    // }
+
+    // sort by services
     if (!!this.props.profile.profiles) {
-      let users = this.props.profile.profiles.find((user) => {
-        return user.handle === name.value;
-      });
-      this.setState({ newUsers: users });
-    } else {
+      console.log(this.props.profile.profiles);
+      // if (!!this.props.profile.services[0]) {
+      //   this.props.profile.services[0].categories.map(item => {
+      //     console.log(item);
+      //   })
+      // }
+
+
+      // let users = this.props.profile.profiles.find((user) => {
+      //   return user.handle === categories.value;
+      // });
+      // this.setState({ newUsers: users });
+    }
+    else {
       console.log('no users match');
     }
   }
