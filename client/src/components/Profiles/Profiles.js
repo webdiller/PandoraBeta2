@@ -6,8 +6,28 @@ import ProfileItem from "./ProfileItem";
 import { getProfiles } from "../../actions/profileActions";
 
 class Profiles extends Component {
+
+  constructor(props) {
+    super(props);
+    // Не вызывайте здесь this.setState()!
+    this.state = { newUsers: [] };
+  }
+
   componentDidMount() {
     this.props.getProfiles();
+  }
+
+  showMatchProfiles = (e) => {
+    e.preventDefault();
+    const { name } = e.target.elements;
+    if (!!this.props.profile.profiles) {
+      let users = this.props.profile.profiles.find((user) => {
+        return user.handle === name.value;
+      });
+      this.setState({ newUsers: users });
+    } else {
+      console.log('no users match');
+    }
   }
 
   render() {
@@ -16,6 +36,7 @@ class Profiles extends Component {
 
     if (profiles === null || loading) {
       profileItems = <Spinner />;
+
     } else {
       if (profiles.length > 0) {
         profileItems = profiles.map((profile) => (
@@ -35,6 +56,13 @@ class Profiles extends Component {
               <p className="lead text-center">
                 Browse and connect with developers
               </p>
+              <form onSubmit={e => { this.showMatchProfiles(e) }}>
+                <p>Искать по параметрам</p>
+                <input placeholder="имя" name="name" type="text" /> <br />
+                <input placeholder="категория" name="category" type="text" /> <br />
+                <input value="применить" type="submit" /> <br />
+              </form>
+
               {profileItems}
             </div>
           </div>

@@ -19,19 +19,16 @@ class ProfileItem extends Component {
           <div>
           </div>
           <div className="col-md-4 d-none d-md-block">
-            <h4>Платежные системы</h4>
-
+            <h4>Категории</h4>
 
             <ul className="list-group">
-              {!!profile.services &&
-                profile.services.map((item, index) => {
-                  {
-                    item.categories.map((subitem, subindex) => (
-                      <span>{subitem}</span>
-                    ))
-                  }
-                }
-                )}
+              {profile.services[0] &&
+                profile.services[0].categories.map((item, index) => (
+                  <li key={index}>
+                    <p>{item}</p>
+                  </li>
+                ))
+              }
             </ul>
 
           </div>
