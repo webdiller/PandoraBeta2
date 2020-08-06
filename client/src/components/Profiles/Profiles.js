@@ -37,7 +37,6 @@ class Profiles extends Component {
       //   })
       // }
 
-
       // let users = this.props.profile.profiles.find((user) => {
       //   return user.handle === categories.value;
       // });
@@ -77,7 +76,13 @@ class Profiles extends Component {
               <form onSubmit={e => { this.showMatchProfiles(e) }}>
                 <p>Искать по параметрам</p>
                 <input placeholder="имя" name="name" type="text" /> <br />
-                <input placeholder="категория" name="category" type="text" /> <br />
+                <select id="myselect" multiple name="category">
+                  <option value="категория" defaultValue>категория</option>
+                  <option value="adasdas">кат1</option>
+                  <option value="кат1">кат1</option>
+                  <option value="кат1">кат2</option>
+                  <option value="кат1">кат3</option>
+                </select>
                 <input value="применить" type="submit" /> <br />
               </form>
 
