@@ -12,6 +12,7 @@ import Navbar from "./components/Layout/Navbar";
 import Footer from "./components/Layout/Footer";
 import Login from "./components/auth/Login";
 import Welcome from "./components/auth/Welcome";
+import Categories from "./components/categories/Categories";
 import PrivateRoute from "./components/common/PrivateRoute";
 import Dashboard from "./components/dashboard/Dashboard";
 
@@ -50,6 +51,7 @@ class App extends Component {
             <Navbar />
             {/* <Route exact path="/login" component={Login} /> */}
             <Route exact path="/login" component={Welcome} />
+            <Route exact path="/categories" component={Categories} />
             <Route exact path="/global-search" component={Profiles} />
             <Switch>
               <PrivateRoute exact path="/dashboard" component={Dashboard} />
