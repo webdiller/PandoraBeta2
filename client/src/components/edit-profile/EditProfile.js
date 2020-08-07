@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import Select from 'react-dropdown-select';
+
 import { connect } from "react-redux";
 import { Link, withRouter } from "react-router-dom";
 import PropTypes from "prop-types";
@@ -11,6 +13,7 @@ import isEmpty from "../../validation/is-empty";
 import Aside from "../aside/Aside";
 
 import './EditProfile.sass'
+import Form from "./Form";
 
 class CreateProfile extends Component {
   constructor(props) {
@@ -167,8 +170,11 @@ class CreateProfile extends Component {
 
                 <Link to="/dashboard" className="btn btn-light">
                   Go Back
-        </Link>
+                </Link>
                 <h1 className="display-4 text-center">Edit Profile</h1>
+
+                {/* {<Form/>} */}
+
                 <small className="d-block pb-3">* = required fields</small>
                 <form onSubmit={this.onSubmit}>
                   <TextFieldGroup
