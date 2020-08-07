@@ -8,6 +8,7 @@ import { clearCurrentProfile } from "./actions/profileActions";
 import { Provider } from "react-redux";
 import store from "./store";
 
+import Header from "./components/Layout/Header";
 import Navbar from "./components/Layout/Navbar";
 import Footer from "./components/Layout/Footer";
 import Login from "./components/auth/Login";
@@ -48,6 +49,7 @@ class App extends Component {
       <Provider store={store}>
         <Router>
           <div className="App">
+            <Header />
             <Navbar />
             {/* <Route exact path="/login" component={Login} /> */}
             <Route exact path="/login" component={Welcome} />
