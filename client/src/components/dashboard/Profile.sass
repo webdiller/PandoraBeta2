@@ -1,0 +1,272 @@
+@import '../../styles/mixins.scss'
+@import '../../styles/variables.scss'
+
+.profile
+    &__container
+        display: flex
+        max-width: 1140px
+        margin: 0 auto
+        padding: 0 20px
+    &__content
+        flex: 1 1 80%
+        margin-top: 40px
+    &__status
+        display: flex
+        flex-wrap: wrap
+        justify-content: space-between
+        margin: 0 -10px 25px -10px 
+        &-item
+            display: flex
+            flex-direction: column
+            align-items: center
+            text-align: center
+            flex: 1 0 calc(45% - 20px)
+            margin: 0 10px 20px 10px
+            padding: 35px 20px
+            border-radius: 10px
+            border: 1px solid #e2e2e2
+        &-title
+            font-size: 16px
+            margin-bottom: 15px
+        &-info
+        &-row
+            +reset-link
+            +reset-btn
+            display: block
+            margin: 0 auto
+            text-align: center
+            border-bottom: 1px solid #333
+            line-height: 1.4
+            &:not(:last-child) 
+                margin-bottom: 5px
+            &:hover
+                text-decoration: none
+        &-name
+            margin-right: 5px
+        &-value
+            display: inline-block
+        &-deposit
+            font-size: 20px
+            font-weight: 600
+        &-date
+            font-size: 20px
+            font-weight: 600
+        &.disabled
+            display: none
+    &__important-info
+        &-title
+            font-size: 20px
+            font-weight: 600
+            margin: 50px 0 30px 0
+        &-subtitle
+            font-size: 16px
+            font-weight: 400
+            margin: 20px 0 
+        &-text
+            font-size: 14px
+    &__form
+    &__services
+        display: flex
+        flex-direction: column
+        align-items: flex-start
+        &-item
+            margin-bottom: 15px
+        &-text
+            margin-bottom: 10px
+    &__username
+        display: flex
+        margin-bottom: 30px
+        text-align: left
+    &__username-title 
+        flex: 0 1 35%
+    &__username-group 
+        display: flex
+        flex: 0 1 50%
+        flex-direction: column
+        align-items: flex-start
+    &__select-wrapper
+        margin-bottom: 10px
+    &__username-input 
+        width: 100%
+        height: 35px
+        border-radius: 2px
+        border: 1px solid #e2e2e2
+        outline: 0
+        padding: 0 10px
+        margin-bottom: 10px
+    &__username-description 
+        display: block
+        padding: 5px
+        padding-left: 10px
+        font-size: 13px
+        font-weight: 500       
+
+.active-orders
+    &.disabled
+        display: none
+    &__wrapper
+    &__title
+        font-size: 22px
+        font-weight: 600
+        line-height: 1
+        margin-bottom: 20px
+    &__list
+    &__item
+        display: flex
+        justify-content: space-between
+        align-items: center
+        padding: 35px 30px
+        border-radius: 10px
+        border: 1px solid #e2e2e2
+        &:not(:last-child) 
+            margin-bottom: 10px
+    &__author
+        font-size: 22px
+        font-weight: 600
+        line-height: 1
+    &__type
+        text-align: center
+        &-icon
+            font-size: 30px
+        &-code
+            text-decoration: underline
+    &__user
+        +reset-link
+        font-size: 22px
+        font-weight: 600
+        line-height: 1
+        text-decoration: underline
+    &__status
+        text-align: center
+        &-price
+            display: block
+            font-size: 22px
+            font-weight: 600
+            line-height: 1
+            margin-bottom: 10px
+        &-apply
+
+.confirm-order
+    &.disabled
+        display: none
+    &__wrapper
+    &__title
+        font-size: 22px
+        font-weight: 600
+        line-height: 1
+        margin-bottom: 50px
+    &__info
+        display: flex
+        align-items: center
+        justify-content: center
+        margin-bottom: 50px
+        &-author
+            font-size: 42px
+            font-weight: 600
+            line-height: 1
+        &-icon
+            margin: 0 25px
+            font-size: 30px
+        &-user
+            +reset-link
+            font-size: 32px
+            font-weight: 600
+            line-height: 1
+            &:hover,
+            &:active,
+            &:focus,
+            &:visited
+                text-decoration: none
+    &__interactions
+        text-align: center
+    &__apply
+        margin-bottom: 10px
+        &-number
+    &__order
+        +reset-btn
+        display: block
+        margin: 0 auto
+        &-icon
+            margin-left: 10px
+
+@media only screen and (max-width: 1440px) 
+    // 
+        
+@media only screen and (max-width: 1220px)
+    // 
+
+@media only screen and (max-width: 991px) 
+    .profile__status-item
+        padding: 15px
+    .profile__status-title
+        font-size: 14px
+    .profile__status-deposit,
+    .profile__status-date
+        font-size: 16px
+    .active-orders__title
+        font-size: 18px
+        margin-bottom: 35px
+    .active-orders__type-icon
+        font-size: 20px
+    .confirm-order__info-author,
+    .confirm-order__info-user,
+    .confirm-order__info-icon
+        font-size: 22px
+    .active-orders__author,
+    .active-orders__user,
+    .active-orders__status-price
+        font-size: 16px
+    .confirm-order__title
+        font-size: 18px
+
+@media only screen and (max-width: 778px) 
+    .profile__content
+        margin-top: 30px
+    .profile__status-item
+        padding: 10px
+    .profile__status-title,
+    .profile__status-name
+        font-size: 13px
+    .profile__status-deposit, .profile__status-date
+        font-size: 14px
+    .active-orders__title,
+    .confirm-order__title,
+    .profile__important-info-title,
+    .confirm-order__info-author, 
+    .confirm-order__info-user,
+    .confirm-order__info-icon
+        font-size: 16px
+    .confirm-order__title
+        margin-bottom: 35px
+    .active-orders__item
+        padding: 15px 10px
+    .active-orders__author, .active-orders__user, .active-orders__status-price
+        font-size: 14px
+    .active-orders__type-icon
+        font-size: 15px
+    .active-orders__type-code
+        font-size: 13px
+    
+            
+@media only screen and (max-width: 576px) 
+    .profile__status
+        margin: 0 0 35px 0
+    .profile__status-item
+        flex-basis: 100%
+        margin: 0
+        &:not(:last-child)
+            margin-bottom: 15px
+    .active-orders__item
+        flex-wrap: wrap
+        padding: 15px 30px 
+    .active-orders__status
+        flex-basis: 100%
+        margin-top: 20px
+    .confirm-order__title
+        margin-bottom: 15px
+    .active-orders__title, .confirm-order__title, .profile__important-info-title, .confirm-order__info-author, .confirm-order__info-user, .confirm-order__info-icon
+        font-size: 14px
+
+@media only screen and (max-width: 480px)
+    .active-orders__item
+        padding: 15px 20px 

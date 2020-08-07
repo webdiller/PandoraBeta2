@@ -15,7 +15,7 @@ import Login from "./components/auth/Login";
 import Welcome from "./components/auth/Welcome";
 import Categories from "./components/categories/Categories";
 import PrivateRoute from "./components/common/PrivateRoute";
-import Dashboard from "./components/dashboard/Dashboard";
+import Profile from "./components/dashboard/Profile";
 
 import "./App.css";
 import CreateProfile from "./components/create-profile/CreateProfile";
@@ -56,7 +56,7 @@ class App extends Component {
             <Route exact path="/categories" component={Categories} />
             <Route exact path="/global-search" component={Profiles} />
             <Switch>
-              <PrivateRoute exact path="/dashboard" component={Dashboard} />
+              <PrivateRoute exact path="/dashboard" component={Profile} />
             </Switch>
             <Switch>
               <PrivateRoute
