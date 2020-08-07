@@ -8,6 +8,9 @@ import TextFieldGroup from "../common/TextFieldGroup";
 // import SelectListGroup from "../common/SelectListGroup";
 import { createProfile, getCurrentProfile } from "../../actions/profileActions";
 import isEmpty from "../../validation/is-empty";
+import Aside from "../aside/Aside";
+
+import './EditProfile.sass'
 
 class CreateProfile extends Component {
   constructor(props) {
@@ -154,42 +157,48 @@ class CreateProfile extends Component {
     ];
 
     return (
-      <div className="create-profile">
-        <div className="container">
-          <div className="row">
-            <div className="col-md-8 m-auto">
-              <Link to="/dashboard" className="btn btn-light">
-                Go Back
-              </Link>
-              <h1 className="display-4 text-center">Edit Profile</h1>
-              <small className="d-block pb-3">* = required fields</small>
-              <form onSubmit={this.onSubmit}>
-                <TextFieldGroup
-                  placeholder="* Profile Handle"
-                  name="handle"
-                  value={this.state.handle}
-                  onChange={this.onChange}
-                  error={errors.handle}
-                  info="A unique handle for your profile URL. Your full name, company name, nickname"
-                />
-                <TextFieldGroup
-                  placeholder="Password"
-                  name="password"
-                  type="password"
-                  value={this.state.password}
-                  onChange={this.onChange}
-                  error={errors.password}
-                />
-                <input
-                  type="submit"
-                  value="Submit"
-                  className="btn btn-info btn-block mt-4"
-                />
-              </form>
+
+      <div className="settings">
+        <div className="settings__container">
+          <Aside />
+          <div className="settings__content">
+            <div className="settings__body">
+              <div className="create-profile">
+
+                <Link to="/dashboard" className="btn btn-light">
+                  Go Back
+        </Link>
+                <h1 className="display-4 text-center">Edit Profile</h1>
+                <small className="d-block pb-3">* = required fields</small>
+                <form onSubmit={this.onSubmit}>
+                  <TextFieldGroup
+                    placeholder="* Profile Handle"
+                    name="handle"
+                    value={this.state.handle}
+                    onChange={this.onChange}
+                    error={errors.handle}
+                    info="A unique handle for your profile URL. Your full name, company name, nickname"
+                  />
+                  <TextFieldGroup
+                    placeholder="Password"
+                    name="password"
+                    type="password"
+                    value={this.state.password}
+                    onChange={this.onChange}
+                    error={errors.password}
+                  />
+                  <input
+                    type="submit"
+                    value="Submit"
+                    className="btn btn-info btn-block mt-4"
+                  />
+                </form>
+              </div>
             </div>
           </div>
         </div>
       </div>
+
     );
   }
 }

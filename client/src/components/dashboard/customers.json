@@ -1,0 +1,150 @@
+[
+    {
+        "id": "00001",
+        "name": "Андрей Александрович",
+        "city": "г. Москва",
+        "raiting": "4.5",
+        "deposit": "3000",
+        "guarantor": "false",
+        "payment": [
+            {
+                "name": "yandex-wallet",
+                "payment": "false"
+            },
+            {
+                "name": "visa",
+                "payment": "false"
+            },
+            {
+                "name": "bitcoin",
+                "payment": "true"
+            }
+        ],
+        "tags": [
+            {
+                "title": "пробив22",
+                "data": "баланс, кредитные истории, паспортные данные"
+            },
+            {
+                "title": "документы",
+                "data": "военники, сканы паспортов, ксивы, ЭЦС"
+            },
+            {
+                "title": "hacking",
+                "data": "взлом почты, whatsapp22"
+            }
+        ],
+        "link": "/"
+    },
+    {
+        "id": "00002",
+        "name": "urist4040",
+        "city": "г. Бийск",
+        "raiting": "4.6",
+        "deposit": "5000",
+        "guarantor": "true",
+        "payment": [
+            {
+                "name": "yandex-wallet",
+                "payment": "false"
+            },
+            {
+                "name": "visa",
+                "payment": "true"
+            },
+            {
+                "name": "bitcoin",
+                "payment": "true"
+            }
+        ],
+        "tags": [
+            {
+                "title": "пробив",
+                "data": "баланс, кредитные истории, паспортные данные"
+            },
+            {
+                "title": "документы",
+                "data": "военники, сканы паспортов, ксивы, ЭЦС"
+            },
+            {
+                "title": "hacking",
+                "data": "взлом почты, whatsapp"
+            }
+        ],
+        "link": "/"
+    },
+    {
+        "id": "00003",
+        "name": "MaximMaxim",
+        "city": "г. Владивосток",
+        "raiting": "4.7",
+        "deposit": "100 000",
+        "guarantor": "false",
+        "payment": [
+            {
+                "name": "yandex-wallet",
+                "payment": "true"
+            },
+            {
+                "name": "visa",
+                "payment": "true"
+            },
+            {
+                "name": "bitcoin",
+                "payment": "true"
+            }
+        ],
+        "tags": [
+            {
+                "title": "пробив",
+                "data": "баланс, кредитные истории, паспортные данные"
+            },
+            {
+                "title": "документы",
+                "data": "военники, сканы паспортов, ксивы, ЭЦС"
+            },
+            {
+                "title": "hacking",
+                "data": "взлом почты, whatsapp"
+            }
+        ],
+        "link": "/"
+    },
+    {
+        "id": "00004",
+        "name": "Макаров А.",
+        "city": "г. Иркутск",
+        "raiting": "4.4",
+        "deposit": "10000",
+        "guarantor": "true",
+        "payment": [
+            {
+                "name": "yandex-wallet",
+                "payment": "true"
+            },
+            {
+                "name": "visa",
+                "payment": "false"
+            },
+            {
+                "name": "bitcoin",
+                "payment": "true"
+            }
+        ],
+        "tags": [
+            {
+                "title": "пробив",
+                "data": "баланс, кредитные истории, паспортные данные"
+            },
+            {
+                "title": "документы",
+                "data": "военники, сканы паспортов, ксивы, ЭЦС"
+            },
+            {
+                "title": "hacking",
+                "data": "взлом почты, whatsapp"
+            }
+        ],
+        "link": "/"
+    }
+]

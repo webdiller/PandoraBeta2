@@ -21,6 +21,8 @@ import "./App.css";
 import CreateProfile from "./components/create-profile/CreateProfile";
 import EditProfile from "./components/edit-profile/EditProfile";
 import Profiles from "./components/Profiles/Profiles";
+import Transactions from "./components/dashboard/Transactions";
+import Favorites from "./components/dashboard/Favorites";
 
 // Check for token
 if (localStorage.jwtToken) {
@@ -55,9 +57,19 @@ class App extends Component {
             <Route exact path="/login" component={Welcome} />
             <Route exact path="/categories" component={Categories} />
             <Route exact path="/global-search" component={Profiles} />
+
             <Switch>
               <PrivateRoute exact path="/dashboard" component={Profile} />
             </Switch>
+
+            <Switch>
+              <PrivateRoute exact path="/transactions" component={Transactions} />
+            </Switch>
+
+            <Switch>
+              <PrivateRoute exact path="/favorites" component={Favorites} />
+            </Switch>
+
             <Switch>
               <PrivateRoute
                 exact
@@ -65,6 +77,7 @@ class App extends Component {
                 component={CreateProfile}
               />
             </Switch>
+
             <Switch>
               <PrivateRoute
                 exact
@@ -72,6 +85,7 @@ class App extends Component {
                 component={EditProfile}
               />
             </Switch>
+            
             <Footer />
           </div>
         </Router>

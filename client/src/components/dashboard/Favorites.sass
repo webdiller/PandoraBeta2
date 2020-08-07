@@ -1,0 +1,191 @@
+@import '../../styles/mixins.scss'
+@import '../../styles/variables.scss'
+
+.favorites
+    &__container
+        display: flex
+        max-width: 1140px
+        margin: 0 auto
+        padding: 0 20px
+        text-align: left
+    &__content
+        flex: 1 1 80%
+        margin-top: 40px
+    &__title
+        font-size: 22px
+        font-weight: 600
+        line-height: 1
+        margin-bottom: 35px
+    &__star
+    &__search
+        position: relative
+        display: flex
+        margin-bottom: 25px
+    &__input
+        width: 100%
+        height: 35px
+        border-radius: 2px
+        border: 1px solid #e2e2e2
+        outline: 0
+        padding: 0 10px
+    &__icon
+        position: absolute
+        top: 50%
+        transform: translateY(-50%)
+        right: 10px
+    &__list
+    &__item
+        display: flex
+        flex-wrap: wrap
+        align-items: center
+        padding: 35px 20px
+        border-radius: 10px
+        border: 1px solid #e2e2e2
+        &:nth-child(even)
+            border: none 
+        &:not(:last-child)
+            margin-bottom: 25px
+    &__profile
+        min-width: 80px
+        text-align: center
+        margin-right: 30px
+    &__profile-img-wrapper
+        display: inline-block
+        position: relative
+        width: 60px
+        height: 60px
+        border-radius: 50%
+        background-color: #333
+    &__profile-img
+        position: absolute
+        top: 50%
+        right: 50%
+        transform: translate(50%, -50%)
+        object-fit: cover
+        width: 100%
+        height: 100%
+    &__profile-name
+        display: -webkit-box
+        width: 80px
+        -webkit-box-orient: vertical
+        overflow: hidden
+        text-overflow: ellipsis
+        white-space: normal
+        -webkit-line-clamp: 1
+        text-align: center
+    &__tags
+        margin-right: 15px
+        &-name
+            margin-right: 5px
+        &-value
+    &__tag
+        display: flex
+        flex-wrap: wrap
+
+    &__deposit
+        margin-left: auto
+        margin-right: 30px
+        text-align: center
+        &-name
+
+        &-price
+
+    &__info
+
+    &__star-icon
+        color: $red
+        margin-right: 5px
+    &__star-value
+        color: $red
+    &__shield
+        text-align: center
+    &__shield-icon
+        color: $red
+    &__comment-filed
+        flex-basis: 100%
+        margin: 10px 0 0 0
+        &.disabled
+            display: none
+    &__comment-wrapper
+        margin-top: 10px
+        text-align: right
+        flex-basis: 100%
+    &__comment-area
+        min-height: 40px
+        resize: none
+        padding: 10px 15px
+        width: 100%;
+        border-radius: 2px;
+        border: 1px solid #e2e2e2;
+        outline: 0;
+        font-size: 13px
+        padding: 10px;
+
+
+@media only screen and (max-width: 1440px) 
+    // 
+        
+@media only screen and (max-width: 1220px)
+    // 
+
+@media only screen and (max-width: 991px) 
+    .favorites__item
+        flex-wrap: wrap
+        padding: 15px
+    .favorites__profile
+        align-self: flex-start
+    .favorites__profile-img-wrapper
+        width: 35px
+        height: 35px 
+    .favorites__tags
+        flex-basis: calc(100% - 110px)
+        margin-right: 0
+        margin-bottom: 10px
+    .favorites__deposit
+        margin-left: 110px
+        text-align: left
+    .favorites__info
+        margin-left: auto
+
+
+@media only screen and (max-width: 778px) 
+    .favorites
+        &__content 
+            margin-top: 30px
+        &__title
+            font-size: 18px
+            margin-bottom: 25px
+        &__profile
+            margin-right: 15px
+        &__profile-name
+            font-size: 13px
+        &__tags
+            flex-basis: calc(100% - 95px)
+        &__deposit
+            margin-left: 95px
+
+@media only screen and (max-width: 576px) 
+    .favorites
+        &__title
+            font-size: 16px
+    .favorites__profile
+        flex-basis: 100%
+        display: flex
+        align-items: center
+        margin-bottom: 10px
+    .favorites__profile-name
+        margin-left: 15px
+    .favorites__profile-img-wrapper
+        width: 25px
+        height: 25px
+    .favorites__tags
+        flex-basis: 100%
+        font-size: 13px
+    .favorites__deposit
+        margin-left: 0
+        font-size: 13px
+    .favorites__star
+        font-size: 13px        
+
+@media only screen and (max-width: 480px)
+    //

@@ -99,14 +99,8 @@ class Dashboard extends Component {
             <div className="profile__username">
               <p className="profile__username-title">Имя пользователя</p>
               <div className="profile__username-group">
-                <input readOnly defaultValue="user4040" type="text" className="profile__username-input" />
+                <input readOnly defaultValue={profile.handle} type="text" className="profile__username-input" />
                 <span className="profile__username-description">видно всем</span>
-              </div>
-            </div>
-
-            <div className="profile__username">
-              <p className="profile__username-title">Опубликованные услуги</p>
-              <div className="profile__username-group profile__services">
               </div>
             </div>
 
