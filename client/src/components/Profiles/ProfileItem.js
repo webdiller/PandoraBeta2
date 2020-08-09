@@ -13,11 +13,16 @@ class ProfileItem extends Component {
           <div className="col-lg-6 col-md-4 col-8">
             <h3>{profile.handle}</h3>
             <Link to={`/profile/${profile.handle}`} className="btn btn-info">
-              View Profile
+              Просмотр профиля
+            </Link>
+            <Link
+              to={`/messanger/${profile.handle}`}
+              className="btn btn-danger"
+            >
+              СВЯЗАТЬСЯ
             </Link>
           </div>
-          <div>
-          </div>
+          <div></div>
           <div className="col-md-4 d-none d-md-block">
             <h4>Категории</h4>
 
@@ -27,10 +32,8 @@ class ProfileItem extends Component {
                   <li key={index}>
                     <p>{item}</p>
                   </li>
-                ))
-              }
+                ))}
             </ul>
-
           </div>
         </div>
       </div>

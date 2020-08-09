@@ -23,6 +23,7 @@ import EditProfile from "./components/edit-profile/EditProfile";
 import Profiles from "./components/Profiles/Profiles";
 import Transactions from "./components/dashboard/Transactions";
 import Favorites from "./components/dashboard/Favorites";
+import Messanger from "./components/messanger/Messanger";
 
 // Check for token
 if (localStorage.jwtToken) {
@@ -63,7 +64,15 @@ class App extends Component {
             </Switch>
 
             <Switch>
-              <PrivateRoute exact path="/transactions" component={Transactions} />
+              <PrivateRoute exact path="/messanger" component={Messanger} />
+            </Switch>
+
+            <Switch>
+              <PrivateRoute
+                exact
+                path="/transactions"
+                component={Transactions}
+              />
             </Switch>
 
             <Switch>
@@ -85,7 +94,7 @@ class App extends Component {
                 component={EditProfile}
               />
             </Switch>
-            
+
             <Footer />
           </div>
         </Router>

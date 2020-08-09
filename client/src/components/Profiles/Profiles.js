@@ -6,7 +6,6 @@ import ProfileItem from "./ProfileItem";
 import { getProfiles } from "../../actions/profileActions";
 
 class Profiles extends Component {
-
   constructor(props) {
     super(props);
     // Не вызывайте здесь this.setState()!
@@ -41,11 +40,10 @@ class Profiles extends Component {
       //   return user.handle === categories.value;
       // });
       // this.setState({ newUsers: users });
+    } else {
+      console.log("no users match");
     }
-    else {
-      console.log('no users match');
-    }
-  }
+  };
 
   render() {
     const { profiles, loading } = this.props.profile;
@@ -53,7 +51,6 @@ class Profiles extends Component {
 
     if (profiles === null || loading) {
       profileItems = <Spinner />;
-
     } else {
       if (profiles.length > 0) {
         profileItems = profiles.map((profile) => (
@@ -69,15 +66,18 @@ class Profiles extends Component {
         <div className="container">
           <div className="row">
             <div className="col-md-12">
-              <h1 className="display-4 text-center">Developer Profiles</h1>
-              <p className="lead text-center">
-                Browse and connect with developers
-              </p>
-              <form onSubmit={e => { this.showMatchProfiles(e) }}>
+              <h1 className="display-4 text-center">Список профилей</h1>
+              <form
+                onSubmit={(e) => {
+                  this.showMatchProfiles(e);
+                }}
+              >
                 <p>Искать по параметрам</p>
                 <input placeholder="имя" name="name" type="text" /> <br />
                 <select id="myselect" multiple name="category">
-                  <option value="категория" defaultValue>категория</option>
+                  <option value="категория" defaultValue>
+                    категория
+                  </option>
                   <option value="adasdas">кат1</option>
                   <option value="кат1">кат1</option>
                   <option value="кат1">кат2</option>
