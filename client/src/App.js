@@ -23,7 +23,7 @@ import EditProfile from "./components/edit-profile/EditProfile";
 import Profiles from "./components/Profiles/Profiles";
 import Transactions from "./components/dashboard/Transactions";
 import Favorites from "./components/dashboard/Favorites";
-import Messanger from "./components/messanger/Messanger";
+// import Messanger from "./components/messanger/Messanger";
 
 // Check for token
 if (localStorage.jwtToken) {
@@ -63,9 +63,9 @@ class App extends Component {
               <PrivateRoute exact path="/dashboard" component={Profile} />
             </Switch>
 
-            <Switch>
+            {/* <Switch>
               <PrivateRoute exact path="/messanger" component={Messanger} />
-            </Switch>
+            </Switch> */}
 
             <Switch>
               <PrivateRoute
