@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import "../node_modules/antd";
 import './index.css';
 import "./styles/index.scss";
 import App from './App';

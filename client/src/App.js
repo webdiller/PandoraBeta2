@@ -16,6 +16,7 @@ import Welcome from "./components/auth/Welcome";
 import Categories from "./components/categories/Categories";
 import PrivateRoute from "./components/common/PrivateRoute";
 import Profile from "./components/dashboard/Profile";
+import Messager from './components/messanger/pages/ChatPage'
 
 import "./App.css";
 import CreateProfile from "./components/create-profile/CreateProfile";
@@ -23,7 +24,6 @@ import EditProfile from "./components/edit-profile/EditProfile";
 import Profiles from "./components/Profiles/Profiles";
 import Transactions from "./components/dashboard/Transactions";
 import Favorites from "./components/dashboard/Favorites";
-// import Messanger from "./components/messanger/Messanger";
 
 // Check for token
 if (localStorage.jwtToken) {
@@ -63,9 +63,9 @@ class App extends Component {
               <PrivateRoute exact path="/dashboard" component={Profile} />
             </Switch>
 
-            {/* <Switch>
-              <PrivateRoute exact path="/messanger" component={Messanger} />
-            </Switch> */}
+            <Switch>
+              <PrivateRoute exact path="/messanger" component={Messager} />
+            </Switch>
 
             <Switch>
               <PrivateRoute
