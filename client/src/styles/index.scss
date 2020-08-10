@@ -4,18 +4,8 @@
 @import "./variables.scss";
 @import "./mixins.scss";
 
-@include font(
-  "OpenSansDev",
-  normal,
-  400,
-  "../assets/fonts/OpenSans/OpenSans-Regular.woff2"
-);
-@include font(
-  "OpenSansDev",
-  normal,
-  600,
-  "../assets/fonts/OpenSans/OpenSans-SemiBold.woff2"
-);
+@include font("OpenSansDev", normal, 400, "../assets/fonts/OpenSans/OpenSans-Regular.woff2");
+@include font("OpenSansDev", normal, 600, "../assets/fonts/OpenSans/OpenSans-SemiBold.woff2");
 
 ::placeholder {
   color: #666;
@@ -152,41 +142,6 @@ html,
 
 .loading {
   height: 600px;
-}
-
-body {
-  background-color: #f4f7fd;
-}
-
-// body,
-// html,
-// #root,
-// .wrapper {
-//   height: 100%;
-//   color: #202020;
-//   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC",
-//     "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial,
-//     sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-//   font-size: 14px;
-// }
-
-// * {
-//   outline: none;
-// }
-
-.ant-btn-circle {
-  border: 0;
-  box-shadow: none;
-  color: #202020 !important;
-  opacity: 0.4;
-
-  &:hover {
-    opacity: 1;
-  }
-
-  &:after {
-    display: none;
-  }
 }
 
 @media only screen and (max-width: 991px) {
