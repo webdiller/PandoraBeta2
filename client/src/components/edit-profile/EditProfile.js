@@ -8,7 +8,7 @@ import TextFieldGroup from "../common/TextFieldGroup";
 // import TextAreaFieldGroup from "../common/TextAreaFieldGroup";
 // import InputGroup from "../common/InputGroup";
 // import SelectListGroup from "../common/SelectListGroup";
-import { createProfile, getCurrentProfile } from "../../redux/actions/profileActions";
+import { createProfile, getCurrentProfile } from "../../actions/profileActions";
 import isEmpty from "../../validation/is-empty";
 import Aside from "../aside/Aside";
 

@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { withRouter } from "react-router-dom";
 // import Moment from "react-moment";
-import { deleteService } from "../../redux/actions/profileActions";
+import { deleteService } from "../../actions/profileActions";
 
 class Service extends Component {
   onDeleteClick(id) {
