@@ -1,13 +1,14 @@
-import React, { useState, useEffect } from 'react';
-import { connect } from 'react-redux';
-import { filesApi } from 'utils/api';
-import socket from 'core/socket';
+import React, { useState, useEffect } from "react";
+import { connect } from "react-redux";
+import { filesApi } from "../../../utils/api";
+import socket from "../../../core/socket";
 
-import { ChatInput as ChatInputBase } from 'components';
+import { ChatInput as ChatInputBase } from "../components";
 
-import { messagesActions, attachmentsActions } from 'redux/actions';
+import messagesActions from "../../../actions/messages";
+import attachmentsActions from "../../../actions/attachments";
 
-const ChatInput = props => {
+const ChatInput = (props) => {
   const {
     dialogs: { currentDialogId },
     attachments,
@@ -27,8 +28,8 @@ const ChatInput = props => {
     window.navigator.msGetUserMedia ||
     window.navigator.webkitGetUserMedia;
 
-  const [value, setValue] = useState('');
-  const [isRecording, setIsRecording] = useState('');
+  const [value, setValue] = useState("");
+  const [isRecording, setIsRecording] = useState("");
   const [mediaRecorder, setMediaRecorder] = useState(null);
   const [emojiPickerVisible, setShowEmojiPicker] = useState(false);
   const [isLoading, setLoading] = useState(false);
@@ -43,7 +44,7 @@ const ChatInput = props => {
     }
   };
 
-  const onRecording = stream => {
+  const onRecording = (stream) => {
     const recorder = new MediaRecorder(stream);
     setMediaRecorder(recorder);
 
@@ -57,8 +58,8 @@ const ChatInput = props => {
       setIsRecording(false);
     };
 
-    recorder.ondataavailable = e => {
-      const file = new File([e.data], 'audio.webm');
+    recorder.ondataavailable = (e) => {
+      const file = new File([e.data], "audio.webm");
       setLoading(true);
       filesApi.upload(file).then(({ data }) => {
         sendAudio(data.file._id).then(() => {
@@ -68,8 +69,8 @@ const ChatInput = props => {
     };
   };
 
-  const onError = err => {
-    console.log('The following error occured: ' + err);
+  const onError = (err) => {
+    console.log("The following error occured: " + err);
   };
 
   const handleOutsideClick = (el, e) => {
@@ -79,10 +80,10 @@ const ChatInput = props => {
   };
 
   const addEmoji = ({ colons }) => {
-    setValue((value + ' ' + colons).trim());
+    setValue((value + " " + colons).trim());
   };
 
-  const sendAudio = audioId => {
+  const sendAudio = (audioId) => {
     return fetchSendMessage({
       text: null,
       dialogId: currentDialogId,
@@ -97,15 +98,15 @@ const ChatInput = props => {
       fetchSendMessage({
         text: value,
         dialogId: currentDialogId,
-        attachments: attachments.map(file => file.uid),
+        attachments: attachments.map((file) => file.uid),
       });
-      setValue('');
+      setValue("");
       setAttachments([]);
     }
   };
 
-  const handleSendMessage = e => {
-    socket.emit('DIALOGS:TYPING', { dialogId: currentDialogId, user });
+  const handleSendMessage = (e) => {
+    socket.emit("DIALOGS:TYPING", { dialogId: currentDialogId, user });
     if (e.keyCode === 13) {
       sendMessage();
     }
@@ -115,7 +116,7 @@ const ChatInput = props => {
     setIsRecording(false);
   };
 
-  const onSelectFiles = async files => {
+  const onSelectFiles = async (files) => {
     let uploaded = [];
     for (let i = 0; i < files.length; i++) {
       const file = files[i];
@@ -125,16 +126,16 @@ const ChatInput = props => {
         {
           uid,
           name: file.name,
-          status: 'uploading',
+          status: "uploading",
         },
       ];
       setAttachments(uploaded);
       // eslint-disable-next-line no-loop-func
       await filesApi.upload(file).then(({ data }) => {
-        uploaded = uploaded.map(item => {
+        uploaded = uploaded.map((item) => {
           if (item.uid === uid) {
             return {
-              status: 'done',
+              status: "done",
               uid: data.file._id,
               name: data.file.filename,
               url: data.file.url,
@@ -148,10 +149,10 @@ const ChatInput = props => {
   };
 
   useEffect(() => {
-    const el = document.querySelector('.chat-input__smile-btn');
-    document.addEventListener('click', handleOutsideClick.bind(this, el));
+    const el = document.querySelector(".chat-input__smile-btn");
+    document.addEventListener("click", handleOutsideClick.bind(this, el));
     return () => {
-      document.removeEventListener('click', handleOutsideClick.bind(this, el));
+      document.removeEventListener("click", handleOutsideClick.bind(this, el));
     };
   }, []);
 
@@ -181,5 +182,5 @@ export default connect(
     attachments: attachments.items,
     user: user.data,
   }),
-  { ...messagesActions, ...attachmentsActions },
+  { ...messagesActions, ...attachmentsActions }
 )(ChatInput);

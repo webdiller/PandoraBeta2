@@ -1,13 +1,13 @@
-import { axios } from "../../core";
+import axios from "axios";
 
 export default {
-  upload: file => {
+  upload: (file) => {
     const formData = new FormData();
     formData.append("file", file);
     return axios.post("/files", formData, {
       headers: {
-        "Content-Type": "multipart/form-data"
-      }
+        "Content-Type": "multipart/form-data",
+      },
     });
-  }
+  },
 };

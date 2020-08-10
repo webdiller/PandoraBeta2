@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import { generateAvatarFromHash } from "utils/helpers";
+import { generateAvatarFromHash } from "../../../../utils/helpers";
 
 import "./Avatar.scss";
 
@@ -20,7 +20,7 @@ const Avatar = ({ user }) => {
     return (
       <div
         style={{
-          background: `#777777`
+          background: `#777777`,
         }}
         className="avatar avatar--symbol"
       >
@@ -31,7 +31,7 @@ const Avatar = ({ user }) => {
 };
 
 Avatar.propTypes = {
-  className: PropTypes.string
+  className: PropTypes.string,
 };
 
 export default Avatar;

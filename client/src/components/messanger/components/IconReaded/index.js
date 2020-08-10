@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
-import readedSvg from "assets/img/readed.svg";
-import noReadedSvg from "assets/img/noreaded.svg";
+import readedSvg from "../assets/img/readed.svg";
+import noReadedSvg from "../assets/img/readed.svg";
 
 const IconReaded = ({ isMe, isReaded }) =>
   (isMe &&
@@ -18,7 +18,7 @@ const IconReaded = ({ isMe, isReaded }) =>
 
 IconReaded.propTypes = {
   isMe: PropTypes.bool,
-  isReaded: PropTypes.bool
+  isReaded: PropTypes.bool,
 };
 
 export default IconReaded;

@@ -1,19 +1,19 @@
-import React, { useState, useRef, useEffect } from 'react';
-import PropTypes from 'prop-types';
-import classNames from 'classnames';
-import { Icon } from 'antd';
-import { Emoji } from 'emoji-mart';
-import reactStringReplace from 'react-string-replace';
+import React, { useState, useRef, useEffect } from "react";
+import PropTypes from "prop-types";
+import classNames from "classnames";
+import { Icon } from "antd";
+import { Emoji } from "emoji-mart";
+import reactStringReplace from "react-string-replace";
 
-import { convertCurrentTime, isAudio } from 'utils/helpers';
+import { convertCurrentTime, isAudio } from "../../../../utils/helpers";
 
-import waveSvg from 'assets/img/wave.svg';
-import playSvg from 'assets/img/play.svg';
-import pauseSvg from 'assets/img/pause.svg';
+import waveSvg from "../assets/img/wave.svg";
+import playSvg from "../assets/img/play.svg";
+import pauseSvg from "../assets/img/pause.svg";
 
-import { Time, IconReaded, Avatar } from '../';
+import { Time, IconReaded, Avatar } from "../";
 
-import './Message.scss';
+import "./Message.scss";
 
 const MessageAudio = ({ audioSrc }) => {
   const audioElem = useRef(null);
@@ -30,31 +30,31 @@ const MessageAudio = ({ audioSrc }) => {
   };
 
   useEffect(() => {
-    audioElem.current.volume = '0.01';
+    audioElem.current.volume = "0.01";
     audioElem.current.addEventListener(
-      'playing',
+      "playing",
       () => {
         setIsPlaying(true);
       },
-      false,
+      false
     );
     audioElem.current.addEventListener(
-      'ended',
+      "ended",
       () => {
         setIsPlaying(false);
         setProgress(0);
         setCurrentTime(0);
       },
-      false,
+      false
     );
     audioElem.current.addEventListener(
-      'pause',
+      "pause",
       () => {
         setIsPlaying(false);
       },
-      false,
+      false
     );
-    audioElem.current.addEventListener('timeupdate', () => {
+    audioElem.current.addEventListener("timeupdate", () => {
       const duration = (audioElem.current && audioElem.current.duration) || 0;
       setCurrentTime(audioElem.current.currentTime);
       setProgress((audioElem.current.currentTime / duration) * 100);
@@ -64,7 +64,10 @@ const MessageAudio = ({ audioSrc }) => {
   return (
     <div className="message__audio">
       <audio ref={audioElem} src={audioSrc} preload="auto" />
-      <div className="message__audio-progress" style={{ width: progress + '%' }} />
+      <div
+        className="message__audio-progress"
+        style={{ width: progress + "%" }}
+      />
       <div className="message__audio-info">
         <div className="message__audio-btn">
           <button onClick={togglePlay}>
@@ -78,7 +81,9 @@ const MessageAudio = ({ audioSrc }) => {
         <div className="message__audio-wave">
           <img src={waveSvg} alt="Wave svg" />
         </div>
-        <span className="message__audio-duration">{convertCurrentTime(currentTime)}</span>
+        <span className="message__audio-duration">
+          {convertCurrentTime(currentTime)}
+        </span>
       </div>
     </div>
   );
@@ -96,15 +101,16 @@ const Message = ({
   onRemoveMessage,
   setPreviewImage,
 }) => {
-  const renderAttachment = item => {
-    if (item.ext !== 'webm') {
+  const renderAttachment = (item) => {
+    if (item.ext !== "webm") {
       return (
         <div
           key={item._id}
           onClick={() => setPreviewImage(item.url)}
-          className="message__attachments-item">
+          className="message__attachments-item"
+        >
           <div className="message__attachments-item-overlay">
-            <Icon type="eye" style={{ color: 'white', fontSize: 18 }} />
+            <Icon type="eye" style={{ color: "white", fontSize: 18 }} />
           </div>
 
           <img src={item.url} alt={item.filename} />
@@ -117,12 +123,17 @@ const Message = ({
 
   return (
     <div
-      className={classNames('message', {
-        'message--isme': isMe,
-        'message--is-typing': isTyping,
-        'message--is-audio': isAudio(attachments),
-        'message--image': !isAudio(attachments) && attachments && attachments.length === 1 && !text,
-      })}>
+      className={classNames("message", {
+        "message--isme": isMe,
+        "message--is-typing": isTyping,
+        "message--is-audio": isAudio(attachments),
+        "message--image":
+          !isAudio(attachments) &&
+          attachments &&
+          attachments.length === 1 &&
+          !text,
+      })}
+    >
       <div className="message__content">
         <IconReaded isMe={isMe} isReaded={readed} />
         <div className="message__info">
@@ -148,7 +159,7 @@ const Message = ({
 
           {attachments && (
             <div className="message__attachments">
-              {attachments.map(item => renderAttachment(item))}
+              {attachments.map((item) => renderAttachment(item))}
             </div>
           )}
 

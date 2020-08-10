@@ -1,13 +1,12 @@
-import React, { useEffect, useState, useRef } from 'react';
-import { connect } from 'react-redux';
-import { Empty } from 'antd';
-import find from 'lodash/find';
+import React, { useEffect, useState, useRef } from "react";
+import { connect } from "react-redux";
+import { Empty } from "antd";
+import find from "lodash/find";
 
-// import { messagesActions } from 'redux/actions';
-import socket from '../../../core/socket';
-// import socket from 'core/socket';
+import messagesActions from "../../../actions/messages";
+import socket from "../../../core/socket";
 
-import { Messages as BaseMessages } from 'components';
+import { Messages as BaseMessages } from "../components";
 
 const Dialogs = ({
   currentDialog,
@@ -30,7 +29,7 @@ const Dialogs = ({
 
   const messagesRef = useRef(null);
 
-  const onNewMessage = data => {
+  const onNewMessage = (data) => {
     addMessage(data);
   };
 
@@ -43,7 +42,7 @@ const Dialogs = ({
   };
 
   useEffect(() => {
-    socket.on('DIALOGS:TYPING', toggleIsTyping);
+    socket.on("DIALOGS:TYPING", toggleIsTyping);
   }, []);
 
   useEffect(() => {
@@ -59,9 +58,9 @@ const Dialogs = ({
       fetchMessages(currentDialog._id);
     }
 
-    socket.on('SERVER:NEW_MESSAGE', onNewMessage);
+    socket.on("SERVER:NEW_MESSAGE", onNewMessage);
 
-    return () => socket.removeListener('SERVER:NEW_MESSAGE', onNewMessage);
+    return () => socket.removeListener("SERVER:NEW_MESSAGE", onNewMessage);
   }, [currentDialog]);
 
   useEffect(() => {
@@ -80,21 +79,21 @@ const Dialogs = ({
       blockHeight={blockHeight}
       isTyping={isTyping}
       partner={
-        user._id !== currentDialog.partner._id ? currentDialog.author : currentDialog.partner
+        user._id !== currentDialog.partner._id
+          ? currentDialog.author
+          : currentDialog.partner
       }
     />
   );
 };
 
-export default Dialogs;
-
-// export default connect(
-//   ({ dialogs, messages, user, attachments }) => ({
-//     currentDialog: find(dialogs.items, { _id: dialogs.currentDialogId }),
-//     items: messages.items,
-//     isLoading: messages.isLoading,
-//     attachments: attachments.items,
-//     user: user.data,
-//   }),
-//   messagesActions,
-// )(Dialogs);
+export default connect(
+  ({ dialogs, messages, user, attachments }) => ({
+    currentDialog: find(dialogs.items, { _id: dialogs.currentDialogId }),
+    items: messages.items,
+    isLoading: messages.isLoading,
+    attachments: attachments.items,
+    user: user.data,
+  }),
+  messagesActions
+)(Dialogs);

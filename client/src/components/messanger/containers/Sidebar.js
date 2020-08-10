@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
-import { userApi, dialogsApi } from "utils/api";
+import { userApi, dialogsApi } from "../../../utils/api";
 
-import { Sidebar } from "components";
+import { Sidebar } from "../components";
 
 const SidebarContainer = ({ user }) => {
   const [visible, setVisible] = useState(false);
@@ -20,7 +20,7 @@ const SidebarContainer = ({ user }) => {
     setVisible(true);
   };
 
-  const onSearch = value => {
+  const onSearch = (value) => {
     setIsLoading(true);
     userApi
       .findUsers(value)
@@ -37,7 +37,7 @@ const SidebarContainer = ({ user }) => {
     dialogsApi
       .create({
         partner: selectedUserId,
-        text: messageText
+        text: messageText,
       })
       .then(onClose)
       .catch(() => {
@@ -45,15 +45,15 @@ const SidebarContainer = ({ user }) => {
       });
   };
 
-  const handleChangeInput = value => {
+  const handleChangeInput = (value) => {
     setInputValue(value);
   };
 
-  const onChangeTextArea = e => {
+  const onChangeTextArea = (e) => {
     setMessagaText(e.target.value);
   };
 
-  const onSelectUser = userId => {
+  const onSelectUser = (userId) => {
     setSelectedUserId(userId);
   };
 

@@ -1,5 +1,5 @@
 import React from "react";
-import { Status as StatusBase } from "components";
+import { Status as StatusBase } from "../components";
 import { connect } from "react-redux";
 
 const Status = ({ currentDialogId, user, dialogs }) => {
@@ -8,7 +8,7 @@ const Status = ({ currentDialogId, user, dialogs }) => {
   }
 
   const currentDialogObj = dialogs.filter(
-    dialog => dialog._id === currentDialogId
+    (dialog) => dialog._id === currentDialogId
   )[0];
 
   let partner = {};
@@ -25,5 +25,5 @@ const Status = ({ currentDialogId, user, dialogs }) => {
 export default connect(({ dialogs, user }) => ({
   dialogs: dialogs.items,
   currentDialogId: dialogs.currentDialogId,
-  user: user.data
+  user: user.data,
 }))(Status);

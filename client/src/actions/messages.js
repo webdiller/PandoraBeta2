@@ -1,54 +1,54 @@
-import { messagesApi } from "utils/api";
+import { messagesApi } from "../utils/api";
 
-const Actions = {
-  setMessages: items => ({
+const messagesActions = {
+  setMessages: (items) => ({
     type: "MESSAGES:SET_ITEMS",
-    payload: items
+    payload: items,
   }),
-  addMessage: message => (dispatch, getState) => {
+  addMessage: (message) => (dispatch, getState) => {
     const { dialogs } = getState();
     const { currentDialogId } = dialogs;
 
     if (currentDialogId === message.dialog._id) {
       dispatch({
         type: "MESSAGES:ADD_MESSAGE",
-        payload: message
+        payload: message,
       });
     }
   },
-  fetchSendMessage: ({ text, dialogId, attachments }) => dispatch => {
+  fetchSendMessage: ({ text, dialogId, attachments }) => (dispatch) => {
     return messagesApi.send(text, dialogId, attachments);
   },
-  setIsLoading: bool => ({
+  setIsLoading: (bool) => ({
     type: "MESSAGES:SET_IS_LOADING",
-    payload: bool
+    payload: bool,
   }),
-  removeMessageById: id => dispatch => {
+  removeMessageById: (id) => (dispatch) => {
     if (window.confirm("Вы действительно хотите удалить сообщение?")) {
       messagesApi
         .removeById(id)
         .then(({ data }) => {
           dispatch({
             type: "MESSAGES:REMOVE_MESSAGE",
-            payload: id
+            payload: id,
           });
         })
         .catch(() => {
-          dispatch(Actions.setIsLoading(false));
+          dispatch(messagesActions.setIsLoading(false));
         });
     }
   },
-  fetchMessages: dialogId => dispatch => {
-    dispatch(Actions.setIsLoading(true));
+  fetchMessages: (dialogId) => (dispatch) => {
+    dispatch(messagesActions.setIsLoading(true));
     messagesApi
       .getAllByDialogId(dialogId)
       .then(({ data }) => {
-        dispatch(Actions.setMessages(data));
+        dispatch(messagesActions.setMessages(data));
       })
       .catch(() => {
-        dispatch(Actions.setIsLoading(false));
+        dispatch(messagesActions.setIsLoading(false));
       });
-  }
+  },
 };
 
-export default Actions;
+export default messagesActions;

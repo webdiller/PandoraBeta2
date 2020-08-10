@@ -4,12 +4,15 @@
   "private": true,
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.13.0",
+    "@navjobs/upload": "^3.2.0",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
-    "antd": "^4.5.3",
+    "antd": "^3.20.7",
     "axios": "^0.19.2",
     "classnames": "^2.2.6",
+    "date-fns": "^2.15.0",
+    "emoji-mart": "^3.0.0",
     "jwt-decode": "^2.2.0",
     "jwt-token": "^1.0.9",
     "node-sass": "^4.14.1",
@@ -23,7 +26,9 @@
     "react-scripts": "3.4.1",
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0",
-    "reset-css": "^5.0.1"
+    "reset-css": "^5.0.1",
+    "socket.io-client": "^2.3.0",
+    "tinycolor2": "^1.4.1"
   },
   "scripts": {
     "start": "react-scripts start",

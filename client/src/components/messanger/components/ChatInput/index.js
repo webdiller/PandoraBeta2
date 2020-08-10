@@ -4,13 +4,13 @@ import { Button, Input } from "antd";
 import { UploadField } from "@navjobs/upload";
 import { Picker } from "emoji-mart";
 
-import { UploadFiles } from "components";
+import { UploadFiles } from "../../components";
 
 import "./ChatInput.scss";
 
 const { TextArea } = Input;
 
-const ChatInput = props => {
+const ChatInput = (props) => {
   const {
     emojiPickerVisible,
     value,
@@ -25,7 +25,7 @@ const ChatInput = props => {
     onRecord,
     onHideRecording,
     removeAttachment,
-    isLoading
+    isLoading,
   } = props;
 
   return (
@@ -35,7 +35,10 @@ const ChatInput = props => {
           <div className="chat-input__smile-btn">
             <div className="chat-input__emoji-picker">
               {emojiPickerVisible && (
-                <Picker onSelect={emojiTag => addEmoji(emojiTag)} set="apple" />
+                <Picker
+                  onSelect={(emojiTag) => addEmoji(emojiTag)}
+                  set="apple"
+                />
               )}
             </div>
             <Button
@@ -59,7 +62,7 @@ const ChatInput = props => {
             </div>
           ) : (
             <TextArea
-              onChange={e => setValue(e.target.value)}
+              onChange={(e) => setValue(e.target.value)}
               onKeyUp={handleSendMessage}
               size="large"
               placeholder="Введите текст сообщения…"
@@ -72,11 +75,11 @@ const ChatInput = props => {
             <UploadField
               onFiles={onSelectFiles}
               containerProps={{
-                className: "chat-input__actions-upload-btn"
+                className: "chat-input__actions-upload-btn",
               }}
               uploadProps={{
                 accept: ".jpg,.jpeg,.png,.gif,.bmp",
-                multiple: "multiple"
+                multiple: "multiple",
               }}
             >
               <Button type="link" shape="circle" icon="camera" />
@@ -116,7 +119,7 @@ const ChatInput = props => {
 };
 
 ChatInput.propTypes = {
-  className: PropTypes.string
+  className: PropTypes.string,
 };
 
 export default ChatInput;

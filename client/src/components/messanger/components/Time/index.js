@@ -1,6 +1,6 @@
 import React, { Fragment } from "react";
 import PropTypes from "prop-types";
-import distanceInWordsToNow from "date-fns/distance_in_words_to_now";
+import distanceInWordsToNow from "date-fns/formatDistanceToNow";
 import ruLocale from "date-fns/locale/ru";
 
 const Time = ({ date }) => (
@@ -10,7 +10,7 @@ const Time = ({ date }) => (
 );
 
 Time.propTypes = {
-  date: PropTypes.string
+  date: PropTypes.string,
 };
 
 export default Time;
