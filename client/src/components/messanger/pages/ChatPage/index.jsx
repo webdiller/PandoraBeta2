@@ -1,7 +1,8 @@
 import React, { useEffect } from 'react';
 import { withRouter } from 'react-router';
-import { Messages, ChatInput, Status, Sidebar } from 'containers';
-import { connect } from 'react-redux';
+// import { Messages, ChatInput, Status, Sidebar } from 'containers';
+import { Messages } from '../../containers';
+// import { connect } from 'react-redux';
 
 import './ChatPage.scss';
 
@@ -18,12 +19,12 @@ const ChatPage = props => {
   return (
     <section className="chatpage">
       <div className="chat">
-        <Sidebar />
+        {/* <Sidebar /> */}
         <div className="chat__dialog">
-            <Status />
+            {/* <Status /> */}
             <Messages />
             <div className="chat__dialog-input">
-              <ChatInput />
+              {/* <ChatInput /> */}
             </div>
           </div>
       </div>
