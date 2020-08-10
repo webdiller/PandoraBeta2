@@ -3,8 +3,9 @@ import { connect } from 'react-redux';
 import { Empty } from 'antd';
 import find from 'lodash/find';
 
-import { messagesActions } from 'redux/actions';
-import socket from 'core/socket';
+// import { messagesActions } from 'redux/actions';
+import socket from '../../../core/socket';
+// import socket from 'core/socket';
 
 import { Messages as BaseMessages } from 'components';
 
@@ -85,13 +86,15 @@ const Dialogs = ({
   );
 };
 
-export default connect(
-  ({ dialogs, messages, user, attachments }) => ({
-    currentDialog: find(dialogs.items, { _id: dialogs.currentDialogId }),
-    items: messages.items,
-    isLoading: messages.isLoading,
-    attachments: attachments.items,
-    user: user.data,
-  }),
-  messagesActions,
-)(Dialogs);
+export default Dialogs;
+
+// export default connect(
+//   ({ dialogs, messages, user, attachments }) => ({
+//     currentDialog: find(dialogs.items, { _id: dialogs.currentDialogId }),
+//     items: messages.items,
+//     isLoading: messages.isLoading,
+//     attachments: attachments.items,
+//     user: user.data,
+//   }),
+//   messagesActions,
+// )(Dialogs);
