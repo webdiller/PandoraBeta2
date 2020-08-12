@@ -5,6 +5,7 @@ import bitcoin from '../../assets/images/bitcoin.png'
 import qiwi from '../../assets/images/qiwi.png';
 import visa from '../../assets/images/visa.png';
 import yandex from '../../assets/images/yandex-money.png';
+import './EditProfile.sass'
 
 const options_location = [
     { value: 'Хакасия', label: 'Хакасия', },
@@ -22,7 +23,6 @@ class Form extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            text: '',
             profileCity: '',
             profileGuarantor: true,
             paymentVisa: false,
@@ -30,11 +30,6 @@ class Form extends Component {
             paymentBitcoin: false,
             paymentQiwi: false,
         }
-        this.handleChange = this.handleChange.bind(this);
-    }
-
-    handleChange(value) {
-        this.setState({ text: value })
     }
 
     onInput = (e) => {
@@ -44,29 +39,37 @@ class Form extends Component {
 
     render() {
         return (
-            <form className="profile__form">
+            <form className="settings__form">
                 {/* Имя пользователя */}
-                <div className="profile__form-group">
-                    <label className="profile__form-label">Имя пользователя</label>
-                    <div className="profile__form-control">
-                        <input onInput={this.onInput} name="profileName" type="text" className="profile__form-input" />
-                        <span className="profile__form-help">Видимо всем</span>
+                <div className="settings__form-group">
+                    <label className="settings__form-label">Имя пользователя</label>
+                    <div className="settings__form-control">
+                        <input onInput={this.onInput} name="profileName" type="text" className="settings__form-input" />
+                        <span className="settings__form-help">Видимо всем</span>
+                    </div>
+                </div>
+
+                {/* Пароль */}
+                <div className="settings__form-group">
+                    <label className="settings__form-label">Пароль</label>
+                    <div className="settings__form-control">
+                        <input onInput={this.onInput} name="profilePassword" type="password" className="settings__form-input" />
                     </div>
                 </div>
 
                 {/* Почта */}
-                <div className="profile__form-group">
-                    <label className="profile__form-label">Электронная почта</label>
-                    <div className="profile__form-control">
-                        <input autoComplete="email" onInput={this.onInput} name="profileEmail" type="email" className="profile__form-input" />
-                        <button type="button" className="profile__form-btn-hide icon-eye-off"></button>
+                <div className="settings__form-group">
+                    <label className="settings__form-label">Электронная почта</label>
+                    <div className="settings__form-control">
+                        <input autoComplete="email" onInput={this.onInput} name="profileEmail" type="email" className="settings__form-input" />
+                        <button type="button" className="settings__form-btn-hide icon-eye-off"></button>
                     </div>
                 </div>
 
                 {/* Регион */}
-                <div className="profile__form-group">
-                    <label className="profile__form-label">Регион / Город</label>
-                    <div className="profile__form-control profile__form-control_select">
+                <div className="settings__form-group">
+                    <label className="settings__form-label">Регион / Город</label>
+                    <div className="settings__form-control settings__form-control_select">
                         <Select
                             options={options_location}
                             values={[]}
@@ -80,25 +83,25 @@ class Form extends Component {
                 </div>
 
                 {/* Гарант */}
-                <div className="profile__form-group">
-                    <label className="profile__form-label profile__form-label_guarantor">Работа через гарант сервис</label>
-                    <div className="profile__form-control profile__form-control_guarantor">
-                        <input onChange={(e) => { this.setState({ profileGuarantor: !this.state.profileGuarantor }) }} checked={this.state.profileGuarantor} className="profile__form-custom-input" type="checkbox" id="profileGarant" />
-                        <label className="profile__form-custom-label" htmlFor="profileGarant"></label>
+                <div className="settings__form-group">
+                    <label className="settings__form-label settings__form-label_guarantor">Работа через гарант сервис</label>
+                    <div className="settings__form-control settings__form-control_guarantor">
+                        <input onChange={(e) => { this.setState({ profileGuarantor: !this.state.profileGuarantor }) }} checked={this.state.profileGuarantor} className="settings__form-custom-input" type="checkbox" id="profileGarant" />
+                        <label className="settings__form-custom-label" htmlFor="profileGarant"></label>
                     </div>
                 </div>
 
-                <div className="profile__form-group">
-                    <label className="profile__form-label">Принимаемые формы оплаты</label>
-                    <div className="profile__form-control profile__form-control_payment">
+                <div className="settings__form-group">
+                    <label className="settings__form-label">Принимаемые формы оплаты</label>
+                    <div className="settings__form-control settings__form-control_payment">
 
                         {/* Visa */}
                         <input
                             onChange={(e) => { this.setState({ paymentVisa: !this.state.paymentVisa }) }}
                             checked={this.state.paymentVisa}
-                            className="profile__form-custom-input profile__form-custom-input_payment"
+                            className="settings__form-custom-input settings__form-custom-input_payment"
                             type="checkbox" id="profileFormPayment1" />
-                        <label className="profile__form-custom-label profile__form-custom-label_payment"
+                        <label className="settings__form-custom-label settings__form-custom-label_payment"
                             htmlFor="profileFormPayment1">
                             <img src={visa} alt="" />
                         </label>
@@ -107,9 +110,9 @@ class Form extends Component {
                         <input
                             onChange={(e) => { this.setState({ paymentBitcoin: !this.state.paymentBitcoin }) }}
                             checked={this.state.paymentBitcoin}
-                            className="profile__form-custom-input profile__form-custom-input_paymen"
+                            className="settings__form-custom-input settings__form-custom-input_paymen"
                             type="checkbox" id="profileFormPayment2" />
-                        <label className="profile__form-custom-label profile__form-custom-label_payment"
+                        <label className="settings__form-custom-label settings__form-custom-label_payment"
                             htmlFor="profileFormPayment2">
                             <img src={bitcoin} alt="" />
                         </label>
@@ -118,9 +121,9 @@ class Form extends Component {
                         <input
                             onChange={(e) => { this.setState({ paymentQiwi: !this.state.paymentQiwi }) }}
                             checked={this.state.paymentQiwi}
-                            className="profile__form-custom-input profile__form-custom-input_paymen"
+                            className="settings__form-custom-input settings__form-custom-input_paymen"
                             type="checkbox" id="profileFormPayment3" />
-                        <label className="profile__form-custom-label profile__form-custom-label_payment"
+                        <label className="settings__form-custom-label settings__form-custom-label_payment"
                             htmlFor="profileFormPayment3">
                             <img src={qiwi} alt="" />
                         </label>
@@ -129,17 +132,17 @@ class Form extends Component {
                         <input
                             onChange={(e) => { this.setState({ paymentYandex: !this.state.paymentYandex }) }}
                             checked={this.state.paymentYandex}
-                            className="profile__form-custom-input profile__form-custom-input_payment"
+                            className="settings__form-custom-input settings__form-custom-input_payment"
                             type="checkbox" id="profileFormPayment4" />
-                        <label className="profile__form-custom-label profile__form-custom-label_payment"
+                        <label className="settings__form-custom-label settings__form-custom-label_payment"
                             htmlFor="profileFormPayment4">
                             <img src={yandex} alt="" />
                         </label>
                     </div>
                 </div>
 
-                <div className="profile__btn-submit-wrapper text-center">
-                    <button type="submit" className="profile__btn-submit site-btn site-btn_red site-btn_s3">Сохранить</button>
+                <div className="settings__btn-submit-wrapper text-center">
+                    <button type="submit" className="settings__btn-submit site-btn site-btn_red site-btn_s3">Сохранить</button>
                 </div>
             </form>
 

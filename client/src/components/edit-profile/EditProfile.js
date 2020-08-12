@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import Select from 'react-dropdown-select';
 
 import { connect } from "react-redux";
 import { Link, withRouter } from "react-router-dom";
@@ -166,11 +165,9 @@ class CreateProfile extends Component {
           <Aside />
           <div className="settings__content">
             <div className="settings__body">
+            <div className="settings__title">Профиль</div>
               <div className="create-profile">
 
-                <Link to="/dashboard" className="btn btn-light">
-                  Go Back
-                </Link>
                 <h1 className="display-4 text-center">Edit Profile</h1>
 
                 {/* {<Form/>} */}
@@ -199,6 +196,8 @@ class CreateProfile extends Component {
                     className="btn btn-info btn-block mt-4"
                   />
                 </form>
+              
+                <Form/>
               </div>
             </div>
           </div>
