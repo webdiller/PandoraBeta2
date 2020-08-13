@@ -27,8 +27,22 @@ class HeaderProfile extends Component {
             errors: {},
         };
 
-        // this.onChange = this.onChange.bind(this);
-        // this.onSubmit = this.onSubmit.bind(this);
+        this.onChange = this.onChange.bind(this);
+        this.onSubmitRegistration = this.onSubmitRegistration.bind(this);
+    }
+
+    onChange(e) {
+        this.setState({ [e.target.name]: e.target.value });
+    }
+
+    onSubmitRegistration(e) {
+        e.preventDefault();
+
+        const newUser = {
+            email: this.state.email,
+        };
+
+        this.props.registeruser(newUser, this.props.history);
     }
 
     // const[showRegistration, setShowRegistration] = React.useState(false);
@@ -45,6 +59,7 @@ class HeaderProfile extends Component {
 
 
     render() {
+
         return (
             <React.Fragment>
 
@@ -56,7 +71,7 @@ class HeaderProfile extends Component {
 
                 {/* Регистрация */}
                 <Modal
-                    // show={true}
+                    show={true}
                     // onHide={handleCloseRegistration}
                     backdrop="static"
                     keyboard={false}
@@ -66,11 +81,15 @@ class HeaderProfile extends Component {
                     </Modal.Header>
 
                     <Modal.Body>
-                        <Form className="d-flex flex-column">
+                        <Form noValidate onSubmit={this.onSubmitRegistration} className="d-flex flex-column">
                             <Form.Group controlId="registration">
                                 <Form.Label>Email address</Form.Label>
-                                <Form.Control value={this.state.email}
-                                    onChange={this.onChange} type="email" placeholder="Enter email" />
+                                <Form.Control
+                                    name="email"
+                                    value={this.state.email}
+                                    onChange={this.onChange}
+                                    type="email"
+                                    placeholder="Enter email" />
                                 <Form.Text className="text-muted">
                                     We'll never share your email with anyone else.
                                     </Form.Text>
