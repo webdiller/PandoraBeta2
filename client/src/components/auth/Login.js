@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 // import classnames from "classnames";
 import { loginUser } from "../../actions/authActions";
 import TextFieldGroup from "../common/TextFieldGroup";
+import './Modals.sass';
 
 class Login extends Component {
   constructor() {
@@ -19,6 +20,7 @@ class Login extends Component {
   }
 
   componentDidMount() {
+    
     if (this.props.auth.isAuthenticated) {
       this.props.history.push("/dashboard");
     }
@@ -55,48 +57,63 @@ class Login extends Component {
     return (
       <div
         className="modal fade"
-        id="exampleModal1"
+        id="modalLogIn"
         tabIndex="-1"
         role="dialog"
         aria-labelledby="exampleModalLabel"
         aria-hidden="true"
       >
         <div className="modal-dialog">
-          <div className="modal-content">
-            <div className="modal-header">
-              <h5 className="modal-title" id="exampleModalLabel">
-                New message
-              </h5>
-              <button
-                type="button"
-                className="close"
-                data-dismiss="modal"
-                aria-label="Close"
-              >
-                <span aria-hidden="true">&times;</span>
+          <div className="modal modal-content">
+            <div className="modal__wrapper text-left">
+
+              <button data-dismiss="modal"
+                aria-label="Close" type="button" className="modal__close">
+                <i className="fas fa-times"></i>
               </button>
-            </div>
-            <div className="modal-body">
+
+              <p className="modal__title">Авторизация</p>
+
               <form noValidate onSubmit={this.onSubmit}>
-                <div className="form-group">
-                  <TextFieldGroup
-                    placeholder="Email Address"
+
+                <div className="modal__group">
+                  <input
+                    placeholder="Почта"
                     name="email"
                     type="email"
+                    error={errors.email}
                     value={this.state.email}
                     onChange={this.onChange}
-                    error={errors.email}
-                  />
-                  <TextFieldGroup
-                    placeholder="Password"
+                    className="modal__input" />
+                </div>
+
+                <div className="modal__group">
+                  <input
+                    placeholder="Пароль"
                     name="password"
                     type="password"
+                    error={errors.password}
                     value={this.state.password}
                     onChange={this.onChange}
-                    error={errors.password}
-                  />
+                    className="modal__input" />
                 </div>
-                <input type="submit" className="btn btn-info btn-block mt-4" />
+
+                <div className="modal__group">
+                  <input
+                    className="modal__agree-input" type="checkbox" name="authAgree" id="authAgree" />
+                  <label className="modal__agree-label" htmlFor="authAgree">
+                    <span className="modal__agree-checkbox"></span>
+                    <span className="modal__agree-text">
+                      Запомнить меня на этом компьютере
+                        </span>
+                  </label>
+                </div>
+
+                <div className="modal__footer">
+                  <button type="submit" className="site-btn site-btn_red site-btn_large">Войти</button>
+                  {/* <Link to="/personal" className="site-btn site-btn_red site-btn_large">Войти</Link> */}
+                  <span className="modal__help-text">Забыли пароль? <a className="modal__help-link" href="#!">Восстановить</a></span>
+                </div>
               </form>
             </div>
           </div>

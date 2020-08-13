@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 import { registeruser } from "../../actions/authActions";
 import TextFieldGroup from "../common/TextFieldGroup";
 import Login from "./Login";
+import './Modals.sass';
 
 class Register extends Component {
   constructor() {
@@ -50,50 +51,68 @@ class Register extends Component {
     return (
       <div
         className="modal fade"
-        id="exampleModal"
+        id="modalRegistration"
         tabIndex="-1"
         role="dialog"
         aria-labelledby="exampleModalLabel"
         aria-hidden="true"
       >
         <div className="modal-dialog">
-          <div className="modal-content">
-            <div className="modal-header">
-              <h5 className="modal-title" id="exampleModalLabel">
-                New message
-              </h5>
-              <button
-                type="button"
-                className="close"
-                data-dismiss="modal"
-                aria-label="Close"
-              >
-                <span aria-hidden="true">&times;</span>
+          <div className="modal modal-content">
+            <div className="modal__wrapper text-left">
+
+              <button data-dismiss="modal"
+                aria-label="Close" type="button" className="modal__close">
+                <i className="fas fa-times"></i>
               </button>
-            </div>
-            <div className="modal-body">
+
+              <p className="modal__title">Регистрация</p>
+
               <form noValidate onSubmit={this.onSubmit}>
-                <div className="form-group">
-                  <TextFieldGroup
-                    placeholder="Email Address"
+
+                <div className="modal__group">
+                  <input
                     name="email"
                     type="email"
                     value={this.state.email}
                     onChange={this.onChange}
-                    error={errors.email}
-                    info="На ваш email придет пароль для входа в аккаунт"
-                  />
+                    autoComplete="email"
+                    placeholder='Введите email'
+                    className="modal__input" />
                 </div>
-                <input type="submit" className="btn btn-info btn-block mt-4" />
+
+                <div className="modal__group">
+                  <input
+                    defaultChecked="checked"
+                    className="modal__agree-input"
+                    type="checkbox"
+                    name="register_agree"
+                    id="register_agree"
+                  />
+
+                  <label className="modal__agree-label" htmlFor="register_agree">
+                    <span className="modal__agree-checkbox"></span>
+                    <span className="modal__agree-text">
+                      Нажимая 'Зарегистрироваться', вы подтверждаете, что ознакомлены и полностью согласны
+                      с
+                      <a className="modal__agree-link" href="#!">условиями пользования сайта</a>
+                    </span>
+                  </label>
+                </div>
+                
+                <div className="modal__footer">
+                  <button type="submit" className="site-btn site-btn_red site-btn_large">Зарегистрироваться</button>
+                  <span className="modal__help-text">Уже есть аккаунт?
+                      <button 
+                      data-dismiss="modal"
+                      data-toggle="modal"
+                      data-target="#modalLogIn"
+                      data-whatever="@mdo" type="button" className="modal__help-link">Войти</button>
+                  </span>
+                </div>
+
               </form>
-              <button
-                className="fas fa-power-off btn btn-primary"
-                type="button"
-                data-toggle="modal"
-                data-target="#exampleModal1"
-                data-whatever="@mdo"
-              ></button>
-              <Login />
+
             </div>
           </div>
         </div>
