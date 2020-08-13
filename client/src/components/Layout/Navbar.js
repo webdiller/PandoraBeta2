@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 import { logoutUser } from "../../actions/authActions";
 import { clearCurrentProfile } from "../../actions/profileActions";
 import Register from "../auth/Register";
+import Login from "../auth/Login";
 
 class Navbar extends Component {
   onLogoutClick(e) {
@@ -48,11 +49,12 @@ class Navbar extends Component {
           className="fas fa-power-off btn btn-primary"
           type="button"
           data-toggle="modal"
-          data-target="#exampleModal"
+          data-target="#modalRegistration"
           data-whatever="@mdo"
         ></button>
         
         <Register />
+        <Login />
       </ul>
     );
 
