@@ -71,7 +71,7 @@ class HeaderProfile extends Component {
 
                 {/* Регистрация */}
                 <Modal
-                    show={true}
+                    // show={true}
                     // onHide={handleCloseRegistration}
                     backdrop="static"
                     keyboard={false}
