@@ -10,7 +10,6 @@ const ProfileSchema = new Schema({
   },
   onlineUser: {
     type: String,
-    required: true,
   },
   handle: {
     type: String,
@@ -39,52 +38,6 @@ const ProfileSchema = new Schema({
           default: Date.now,
         },
       },
-    },
-  ],
-  chats: [
-    {
-      chatId: {
-        type: String,
-        unique: true,
-        required: true,
-      },
-      userchat: {
-        type: Schema.Types.ObjectId,
-        ref: "users",
-      },
-      lastSeenMessage: {
-        type: String,
-        required: true,
-      },
-      onlineUser: {
-        type: String,
-        required: true,
-      },
-      time: {
-        type: Date,
-        default: Date.now,
-      },
-      messages: [
-        {
-          user: {
-            type: Schema.Types.ObjectId,
-            ref: "users",
-          },
-          text: {
-            type: String,
-            required: true,
-          },
-          time: {
-            type: Date,
-            default: Date.now,
-            required: true,
-          },
-          read: {
-            type: String,
-            default: false,
-          },
-        },
-      ],
     },
   ],
   guarantor_service: {

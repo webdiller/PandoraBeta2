@@ -20,7 +20,7 @@ import Profile from "./components/dashboard/Profile";
 import "./App.css";
 import CreateProfile from "./components/create-profile/CreateProfile";
 import EditProfile from "./components/edit-profile/EditProfile";
-import Profiles from "./components/Profiles/Profiles";
+import ProfilesNew from "./components/Profiles/ProfilesNew";
 import Transactions from "./components/dashboard/Transactions";
 import Favorites from "./components/dashboard/Favorites";
 import Messanger from "./components/messanger/Messanger";
@@ -57,7 +57,7 @@ class App extends Component {
             {/* <Route exact path="/login" component={Login} /> */}
             <Route exact path="/login" component={Welcome} />
             <Route exact path="/categories" component={Categories} />
-            <Route exact path="/global-search" component={Profiles} />
+            <Route exact path="/global-search" component={ProfilesNew} />
 
             <Switch>
               <PrivateRoute exact path="/dashboard" component={Profile} />
