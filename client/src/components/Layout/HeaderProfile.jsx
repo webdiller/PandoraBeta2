@@ -38,13 +38,19 @@ class HeaderProfile extends Component {
     render() {
         return (
             <React.Fragment>
-                <div
-                    data-toggle="modal"
-                    data-target="#modalRegistration"
-                    data-whatever="@mdo" to="/dashboard" className="header__bar-icon">
-                    <i className="header__bar-icon-inner far fa-user"></i>
-
-                </div>
+                {this.props.auth.isAuthenticated ?
+                    <Link
+                        to="/dashboard" className="header__bar-icon">
+                        <i className="header__bar-icon-inner far fa-user"></i>
+                    </Link>
+                    :
+                    <div
+                        data-toggle="modal"
+                        data-target="#modalRegistration"
+                        data-whatever="@mdo" to="/dashboard" className="header__bar-icon">
+                        <i className="header__bar-icon-inner far fa-user"></i>
+                    </div>
+                }
                 <Register />
                 <Login />
             </React.Fragment>

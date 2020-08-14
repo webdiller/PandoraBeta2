@@ -1,5 +1,9 @@
 import React, { useState } from 'react';
 import Select from 'react-dropdown-select';
+import { withRouter } from "react-router-dom";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
+import { addEducation } from "../../actions/profileActions";
 
 const AddService2 = () => {
 
@@ -56,4 +60,18 @@ const AddService2 = () => {
     );
 };
 
-export default AddService2;
+AddService2.propTypes = {
+    addEducation: PropTypes.func.isRequired,
+    profile: PropTypes.object.isRequired,
+    errors: PropTypes.object.isRequired,
+  };
+  
+  const mapStateToProps = (state) => ({
+    profile: state.profile,
+    errors: state.errors,
+  });
+  
+  export default connect(mapStateToProps, { addEducation })(
+    withRouter(AddService2)
+  );
+  
