@@ -1,15 +1,14 @@
 import React, { Component } from 'react';
-import Results from '../Results/Results';
 
 import { Range, getTrackBackground } from 'react-range';
 import Select from 'react-dropdown-select';
 
 import './AdvancedSearch.sass'
 
-import bitcoin from '../../../images/bitcoin.png';
-import qiwi from '../../../images/qiwi.png';
-import visa from '../../../images/visa.png';
-import yandex from '../../../images/yandex-money.png';
+import bitcoin from '../../assets/images/bitcoin.png';
+import qiwi from '../../assets/images/qiwi.png';
+import visa from '../../assets/images/visa.png';
+import yandex from '../../assets/images/yandex-money.png';
 
 const options_location = [
 	{ value: 'Любой', label: 'Любой', },
@@ -319,7 +318,6 @@ export default class AdvancedSearch extends Component {
 					</div>
 
 				</form >
-				<Results />
 			</div>
 		);
 	}

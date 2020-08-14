@@ -5,6 +5,7 @@ import Spinner from "../common/Spinner";
 import ProfileItem from "./ProfileItem";
 import { getProfiles } from "../../actions/profileActions";
 import './Results.sass'
+import AdvancedSearch from "../AdvancedSearch/AdvancedSearch";
 
 class ProfilesNew extends Component {
 
@@ -40,10 +41,12 @@ class ProfilesNew extends Component {
           <div className="row">
             <div className="col-md-12">
 
-            <div className="results__top">
+              <AdvancedSearch />
+
+              <div className="results__top">
                 <p className="results__title">Найдено 2 исполнителя:</p>
                 <p className="results__value">проверка репутации застройщика</p>
-            </div>
+              </div>
 
               <div className="results__table-wrapper">
                 <div className="results__table">
