@@ -51,16 +51,7 @@ class Navbar extends Component {
           data-target="#exampleModal"
           data-whatever="@mdo"
         ></button>
-        {/* <li className="nav-item">
-          <Link className="nav-link" to="/register">
-            Sign Up
-          </Link>
-        </li>
-        <li className="nav-item">
-          <Link className="nav-link" to="/login">
-            Login
-          </Link>
-        </li> */}
+        
         <Register />
       </ul>
     );
