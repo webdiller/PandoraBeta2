@@ -24,6 +24,7 @@ import ProfilesNew from "./components/Profiles/ProfilesNew";
 import Transactions from "./components/dashboard/Transactions";
 import Favorites from "./components/dashboard/Favorites";
 import Messanger from "./components/messanger/Messanger";
+import Loader from "./components/loader/Loader";
 
 // Check for token
 if (localStorage.jwtToken) {
@@ -47,11 +48,28 @@ if (localStorage.jwtToken) {
 }
 
 class App extends Component {
+
+  constructor (props) {
+    super(props);
+    this.state = {
+      active: true
+    }
+  }
+
+  componentDidMount() {
+    setTimeout(() =>{
+      this.setState({active: false})
+    },3000)
+  }
+
   render() {
     return (
       <Provider store={store}>
         <Router>
           <div className="App">
+
+            <Loader active={this.state.active} />
+
             <Header />
             <Navbar />
             {/* <Route exact path="/login" component={Login} /> */}
