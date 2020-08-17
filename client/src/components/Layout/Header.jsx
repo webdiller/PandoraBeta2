@@ -8,8 +8,7 @@ import HeaderProfile from './HeaderProfile';
 
 function Header() {
 
-    const [search, setSearch] = useState(true);
-    console.log(search);
+    const [searchTab, setSearchTab] = useState(true);
 
     const Logo = () => {
         return (
@@ -33,13 +32,13 @@ function Header() {
     const Navigation = () => {
         return (
             <nav className="navigation">
-                <Link to="/global-search" className={search ? "navigation__item navigation__item--active" : "navigation__item"}
-                    onClick={() => setSearch(true)} 
+                <Link to="/global-search" className={searchTab ? "navigation__item navigation__item--active" : "navigation__item"}
+                    onClick={() => setSearchTab(true)} 
                 >
                     <span className="navigation__link">Поиск</span>
                 </Link>
-                <Link to="/categories" className={(!search) ? "navigation__item navigation__item--active" : "navigation__item"}
-                    onClick={() => setSearch(false)} 
+                <Link to="/categories" className={(!searchTab) ? "navigation__item navigation__item--active" : "navigation__item"}
+                    onClick={() => setSearchTab(false)} 
                 >
                     <span className="navigation__link">Все разделы</span>
                 </Link>
