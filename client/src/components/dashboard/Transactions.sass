@@ -1,0 +1,66 @@
+@import '../../styles/mixins.scss'
+@import '../../styles/variables.scss'
+
+.transactions
+    &__container
+        display: flex
+        max-width: 1140px
+        margin: 0 auto
+        padding: 0 20px
+        text-align: left
+    &__content
+        flex: 1 1 80%
+        margin-top: 40px
+    &__title
+        font-size: 22px
+        font-weight: 600
+        line-height: 1
+        margin-bottom: 35px
+    &__list
+        display: flex
+        flex-direction: column
+        align-items: flex-start
+    &__item
+        +reset-btn
+        display: flex
+        justify-content: space-between
+        align-items: center
+        width: 100%
+        margin-bottom: 15px
+        padding: 10px
+        background-color: #fafafa
+    &__item-number
+    &__item-status
+    &__item-date
+
+
+@media only screen and (max-width: 1440px) 
+    // 
+        
+@media only screen and (max-width: 1220px)
+    // 
+
+@media only screen and (max-width: 1000px) 
+    // 
+
+@media only screen and (max-width: 778px) 
+    .transactions
+        &__content
+            margin-top: 30px
+        &__title
+            font-size: 18px
+            margin-bottom: 25px
+        &__item
+            padding: 5px 10px 
+            font-size: 13px
+            margin-bottom: 5px
+            
+@media only screen and (max-width: 576px) 
+    .transactions
+        &__title
+            font-size: 16px
+        &__item
+            font-size: 12px
+
+@media only screen and (max-width: 480px)
+    //

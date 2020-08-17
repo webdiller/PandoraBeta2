@@ -2,11 +2,10 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import Spinner from "../common/Spinner";
-import ProfileItem from "./ProfileItem";
+import ProfileItemNew from "./ProfileItemNew";
 import { getProfiles } from "../../actions/profileActions";
 
 class Profiles extends Component {
-
   constructor(props) {
     super(props);
     // Не вызывайте здесь this.setState()!
@@ -19,6 +18,7 @@ class Profiles extends Component {
 
   showMatchProfiles = (e) => {
     e.preventDefault();
+<<<<<<< HEAD
 
     const profiles = this.props.profile.profiles;
     const all_categories = profiles.filter(item => (
@@ -36,6 +36,34 @@ class Profiles extends Component {
     ));
     console.log(profilesWithServisesFilter);
   }
+=======
+    const { name, categories } = e.target.elements;
+    // sort by handle
+    // if (!!this.props.profile.profiles) {
+    //   let users = this.props.profile.profiles.find((user) => {
+    //     return user.handle === name.value;
+    //   });
+    //   this.setState({ newUsers: users });
+    // }
+
+    // sort by services
+    if (!!this.props.profile.profiles) {
+      console.log(this.props.profile.profiles);
+      // if (!!this.props.profile.services[0]) {
+      //   this.props.profile.services[0].categories.map(item => {
+      //     console.log(item);
+      //   })
+      // }
+
+      // let users = this.props.profile.profiles.find((user) => {
+      //   return user.handle === categories.value;
+      // });
+      // this.setState({ newUsers: users });
+    } else {
+      console.log("no users match");
+    }
+  };
+>>>>>>> master
 
   render() {
     const { profiles, loading } = this.props.profile;
@@ -43,11 +71,10 @@ class Profiles extends Component {
 
     if (profiles === null || loading) {
       profileItems = <Spinner />;
-
     } else {
       if (profiles.length > 0) {
         profileItems = profiles.map((profile) => (
-          <ProfileItem key={profile._id} profile={profile} />
+          <ProfileItemNew key={profile._id} profile={profile} />
         ));
       } else {
         profileItems = <h4>No profiles found...</h4>;
@@ -60,6 +87,7 @@ class Profiles extends Component {
         <div className="container">
           <div className="row">
             <div className="col-md-12">
+<<<<<<< HEAD
               <h1 className="display-4 text-center">Developer Profiles</h1>
               <p className="lead text-center">
                 Browse and connect with developers
@@ -138,6 +166,27 @@ class Profiles extends Component {
                   </div>
                 </div>
               </div>
+=======
+              <h1 className="display-4 text-center">Список профилей</h1>
+              <form
+                onSubmit={(e) => {
+                  this.showMatchProfiles(e);
+                }}
+              >
+                <p>Искать по параметрам</p>
+                <input placeholder="имя" name="name" type="text" /> <br />
+                <select id="myselect" multiple name="category">
+                  <option value="категория" defaultValue>
+                    категория
+                  </option>
+                  <option value="adasdas">кат1</option>
+                  <option value="кат1">кат1</option>
+                  <option value="кат1">кат2</option>
+                  <option value="кат1">кат3</option>
+                </select>
+                <input value="применить" type="submit" /> <br />
+              </form>
+>>>>>>> master
 
               {profileItems}
             </div>

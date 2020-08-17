@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const { text } = require("body-parser");
 const Schema = mongoose.Schema;
 
 // Create Schema
@@ -6,6 +7,9 @@ const ProfileSchema = new Schema({
   user: {
     type: Schema.Types.ObjectId,
     ref: "users",
+  },
+  onlineUser: {
+    type: String,
   },
   handle: {
     type: String,
@@ -36,6 +40,9 @@ const ProfileSchema = new Schema({
       },
     },
   ],
+  guarantor_service: {
+    type: String,
+  },
   payment_methods: {
     visa: {
       type: String,

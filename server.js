@@ -1,18 +1,23 @@
 const express = require("express");
-// const morgan = require("morgan");
 const bodyParser = require("body-parser");
-// const cookieParser = require("cookie-parser");
 const passport = require("passport");
-// const cors = require("cors");
 require("dotenv").config();
 const mongoose = require("mongoose");
 
 // Connect Routes To App
 const users = require("./routes/api/users");
 const profile = require("./routes/api/profile");
+const ChatCtrl = require("./routes/api/chat");
+const MessageCtrl = require("./routes/api/message");
+
+// Import Sockets
+const { createSocket } = require("./socket");
 
 // Initialize App
 const app = express();
+const server = require("http").Server(app);
+const io = createSocket(server);
+
 // Connect to MongoDB
 mongoose
   .connect(process.env.DATABASE, {
@@ -21,14 +26,14 @@ mongoose
     useUnifiedTopology: true,
     useFindAndModify: false,
   })
-  .then(() => console.log("Connected to MongoDB Successfully!"))
+  .then(() => {
+    console.log("Connected to MongoDB Successfully!");
+  })
   .catch((err) => console.log(`Error: ${err}`));
 
 // Middlewares App
-// app.use(morgan("dev"));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-// app.use(cookieParser());
 
 // Passport Middleware
 app.use(passport.initialize());
@@ -36,15 +41,45 @@ app.use(passport.initialize());
 // Passport Config
 require("./config/passport")(passport);
 
-// cors
-// if (process.env.MODE_ENV === "development") {
-//   app.use(cors({ origin: `${process.env.CLIENT_URL}` }));
-// }
-
 // Use Routes
 app.use("/api/users", users);
 app.use("/api/profile", profile);
 
+const ChatController = new ChatCtrl(io);
+const MessageController = new MessageCtrl(io);
+
+app.get(
+  "/api/chats",
+  passport.authenticate("jwt", { session: false }),
+  ChatController.index
+);
+app.delete(
+  "/api/chats/:id",
+  passport.authenticate("jwt", { session: false }),
+  ChatController.delete
+);
+app.post(
+  "/api/chats",
+  passport.authenticate("jwt", { session: false }),
+  ChatController.create
+);
+
+app.get(
+  "/api/messages",
+  passport.authenticate("jwt", { session: false }),
+  MessageController.index
+);
+app.post(
+  "/api/messages",
+  passport.authenticate("jwt", { session: false }),
+  MessageController.create
+);
+app.delete(
+  "/api/messages",
+  passport.authenticate("jwt", { session: false }),
+  MessageController.delete
+);
+
 // Connect to Server and Initialize port
 const port = process.env.PORT || 5000;
-app.listen(port, () => console.log(`Server is running on port ${port}`));
+server.listen(port, () => console.log(`Server is running on port ${port}`));

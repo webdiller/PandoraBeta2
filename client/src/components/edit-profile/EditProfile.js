@@ -1,13 +1,30 @@
 import React, { Component } from "react";
+import Select from 'react-dropdown-select';
+
 import { connect } from "react-redux";
-import { Link, withRouter } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import PropTypes from "prop-types";
-import TextFieldGroup from "../common/TextFieldGroup";
-// import TextAreaFieldGroup from "../common/TextAreaFieldGroup";
-// import InputGroup from "../common/InputGroup";
-// import SelectListGroup from "../common/SelectListGroup";
 import { createProfile, getCurrentProfile } from "../../actions/profileActions";
 import isEmpty from "../../validation/is-empty";
+import Aside from "../aside/Aside";
+
+import bitcoin from '../../assets/images/bitcoin.png'
+import qiwi from '../../assets/images/qiwi.png';
+import visa from '../../assets/images/visa.png';
+import yandex from '../../assets/images/yandex-money.png';
+
+import './EditProfile.sass'
+
+const options_location = [
+  { value: 'Хакасия', label: 'Хакасия', },
+  { value: 'Приволжский', label: 'Приволжский', },
+  { value: 'Ардатов', label: 'Ардатов', },
+  { value: 'Москва', label: 'Москва', },
+  { value: 'Санкт-Петербург', label: 'Санкт-Петербург', },
+  { value: 'Армавир', label: 'Армавир', },
+  { value: 'Владивосток', label: 'Владивосток', },
+  { value: 'Артёмовск', label: 'Артёмовск', },
+];
 
 class CreateProfile extends Component {
   constructor(props) {
@@ -87,109 +104,132 @@ class CreateProfile extends Component {
   render() {
     const { errors, displaySocialInputs } = this.state;
 
-    let socialInputs;
-
-    // if (displaySocialInputs) {
-    //   socialInputs = (
-    //     <div>
-    //       <InputGroup
-    //         placeholder="Twitter Profile URL"
-    //         name="twitter"
-    //         icon="fab fa-twitter"
-    //         value={this.state.twitter}
-    //         onChange={this.onChange}
-    //         error={errors.twitter}
-    //       />
-
-    //       <InputGroup
-    //         placeholder="Facebook Page URL"
-    //         name="facebook"
-    //         icon="fab fa-facebook"
-    //         value={this.state.facebook}
-    //         onChange={this.onChange}
-    //         error={errors.facebook}
-    //       />
-
-    //       <InputGroup
-    //         placeholder="Linkedin Profile URL"
-    //         name="linkedin"
-    //         icon="fab fa-linkedin"
-    //         value={this.state.linkedin}
-    //         onChange={this.onChange}
-    //         error={errors.linkedin}
-    //       />
-
-    //       <InputGroup
-    //         placeholder="YouTube Channel URL"
-    //         name="youtube"
-    //         icon="fab fa-youtube"
-    //         value={this.state.youtube}
-    //         onChange={this.onChange}
-    //         error={errors.youtube}
-    //       />
-
-    //       <InputGroup
-    //         placeholder="Instagram Page URL"
-    //         name="instagram"
-    //         icon="fab fa-instagram"
-    //         value={this.state.instagram}
-    //         onChange={this.onChange}
-    //         error={errors.instagram}
-    //       />
-    //     </div>
-    //   );
-    // }
-
-    // Select options for status
-    const options = [
-      { label: "* Select Professional Status", value: 0 },
-      { label: "Developer", value: "Developer" },
-      { label: "Junior Developer", value: "Junior Developer" },
-      { label: "Senior Developer", value: "Senior Developer" },
-      { label: "Manager", value: "Manager" },
-      { label: "Student or Learning", value: "Student or Learning" },
-      { label: "Instructor or Teacher", value: "Instructor or Teacher" },
-      { label: "Intern", value: "Intern" },
-      { label: "Other", value: "Other" },
-    ];
-
     return (
-      <div className="create-profile">
-        <div className="container">
-          <div className="row">
-            <div className="col-md-8 m-auto">
-              <Link to="/dashboard" className="btn btn-light">
-                Go Back
-              </Link>
-              <h1 className="display-4 text-center">Edit Profile</h1>
-              <small className="d-block pb-3">* = required fields</small>
-              <form onSubmit={this.onSubmit}>
-                <TextFieldGroup
-                  placeholder="* Profile Handle"
-                  name="handle"
-                  value={this.state.handle}
-                  onChange={this.onChange}
-                  error={errors.handle}
-                  info="A unique handle for your profile URL. Your full name, company name, nickname"
-                />
-                <TextFieldGroup
-                  placeholder="Password"
-                  name="password"
-                  type="password"
-                  value={this.state.password}
-                  onChange={this.onChange}
-                  error={errors.password}
-                />
-                <input
-                  type="submit"
-                  value="Submit"
-                  className="btn btn-info btn-block mt-4"
-                />
+
+      <div className="settings">
+        <div className="settings__container">
+          <Aside />
+          <div className="settings__content">
+            <div className="settings__body">
+              <div className="settings__title">Профиль</div>
+
+              <form className="settings__form" onSubmit={this.onSubmit}>
+
+                <div className="settings__form-group">
+                  <label className="settings__form-label">Имя пользователя</label>
+                  <div className="settings__form-control">
+                    <input placeholder="Загрузка имени профиля..." name="handle"
+                      value={this.state.handle}
+                      onChange={this.onChange} type="text" className="settings__form-input" />
+                    <span className="settings__form-help">Видимо всем</span>
+                  </div>
+                </div>
+
+                <div className="settings__form-group">
+                  <label className="settings__form-label">Пароль</label>
+                  <div className="settings__form-control">
+                    <input name="password"
+                      type="password"
+                      value={this.state.password}
+                      onChange={this.onChange}
+                      className="settings__form-input" />
+                  </div>
+                </div>
+
+                {/* Почта */}
+                <div className="settings__form-group">
+                    <label className="settings__form-label">Электронная почта</label>
+                    <div className="settings__form-control">
+                        <input autoComplete="email" onInput={this.onInput} name="profileEmail" type="email" className="settings__form-input" />
+                        <button type="button" className="settings__form-btn-hide icon-eye-off"></button>
+                    </div>
+                </div>
+
+                {/* Регион */}
+                <div className="settings__form-group">
+                    <label className="settings__form-label">Регион / Город</label>
+                    <div className="settings__form-control settings__form-control_select">
+                        <Select
+                            options={options_location}
+                            values={[]}
+                            placeholder="Регион"
+                            value
+                            onChange={(value) => {
+                                this.setState({ profileCity: value[0].value })
+                            }}
+                        />
+                    </div>
+                </div>
+
+                {/* Гарант */}
+                <div className="settings__form-group">
+                    <label className="settings__form-label settings__form-label_guarantor">Работа через гарант сервис</label>
+                    <div className="settings__form-control settings__form-control_guarantor">
+                        <input onChange={(e) => { this.setState({ profileGuarantor: !this.state.profileGuarantor }) }} checked={this.state.profileGuarantor} className="settings__form-custom-input" type="checkbox" id="profileGarant" />
+                        <label className="settings__form-custom-label" htmlFor="profileGarant"></label>
+                    </div>
+                </div>
+
+                <div className="settings__form-group">
+                    <label className="settings__form-label">Принимаемые формы оплаты</label>
+                    <div className="settings__form-control settings__form-control_payment">
+
+                        {/* Visa */}
+                        <input
+                            onChange={(e) => { this.setState({ paymentVisa: !this.state.paymentVisa }) }}
+                            checked={this.state.paymentVisa}
+                            className="settings__form-custom-input settings__form-custom-input_payment"
+                            type="checkbox" id="profileFormPayment1" />
+                        <label className="settings__form-custom-label settings__form-custom-label_payment"
+                            htmlFor="profileFormPayment1">
+                            <img src={visa} alt="" />
+                        </label>
+
+                        {/* Bitcoin */}
+                        <input
+                            onChange={(e) => { this.setState({ paymentBitcoin: !this.state.paymentBitcoin }) }}
+                            checked={this.state.paymentBitcoin}
+                            className="settings__form-custom-input settings__form-custom-input_paymen"
+                            type="checkbox" id="profileFormPayment2" />
+                        <label className="settings__form-custom-label settings__form-custom-label_payment"
+                            htmlFor="profileFormPayment2">
+                            <img src={bitcoin} alt="" />
+                        </label>
+
+                        {/* Qiwi */}
+                        <input
+                            onChange={(e) => { this.setState({ paymentQiwi: !this.state.paymentQiwi }) }}
+                            checked={this.state.paymentQiwi}
+                            className="settings__form-custom-input settings__form-custom-input_paymen"
+                            type="checkbox" id="profileFormPayment3" />
+                        <label className="settings__form-custom-label settings__form-custom-label_payment"
+                            htmlFor="profileFormPayment3">
+                            <img src={qiwi} alt="" />
+                        </label>
+
+                        {/* Yandex */}
+                        <input
+                            onChange={(e) => { this.setState({ paymentYandex: !this.state.paymentYandex }) }}
+                            checked={this.state.paymentYandex}
+                            className="settings__form-custom-input settings__form-custom-input_payment"
+                            type="checkbox" id="profileFormPayment4" />
+                        <label className="settings__form-custom-label settings__form-custom-label_payment"
+                            htmlFor="profileFormPayment4">
+                            <img src={yandex} alt="" />
+                        </label>
+                    </div>
+                </div>
+
+                <div className="settings__btn-submit-wrapper text-center">
+                    <button type="submit" className="settings__btn-submit site-btn site-btn_red site-btn_s3">Сохранить</button>
+                </div>
               </form>
+
             </div>
           </div>
         </div>
       </div>
+
     );
   }
 }

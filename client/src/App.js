@@ -8,17 +8,22 @@ import { clearCurrentProfile } from "./actions/profileActions";
 import { Provider } from "react-redux";
 import store from "./store";
 
+import Header from "./components/Layout/Header";
 import Navbar from "./components/Layout/Navbar";
 import Footer from "./components/Layout/Footer";
 import Login from "./components/auth/Login";
 import Welcome from "./components/auth/Welcome";
+import Categories from "./components/categories/Categories";
 import PrivateRoute from "./components/common/PrivateRoute";
-import Dashboard from "./components/dashboard/Dashboard";
+import Profile from "./components/dashboard/Profile";
 
 import "./App.css";
 import CreateProfile from "./components/create-profile/CreateProfile";
 import EditProfile from "./components/edit-profile/EditProfile";
-import Profiles from "./components/Profiles/Profiles";
+import ProfilesNew from "./components/Profiles/ProfilesNew";
+import Transactions from "./components/dashboard/Transactions";
+import Favorites from "./components/dashboard/Favorites";
+import Messanger from "./components/messanger/Messanger";
 
 // Check for token
 if (localStorage.jwtToken) {
@@ -47,13 +52,33 @@ class App extends Component {
       <Provider store={store}>
         <Router>
           <div className="App">
+            <Header />
             <Navbar />
             {/* <Route exact path="/login" component={Login} /> */}
             <Route exact path="/login" component={Welcome} />
-            <Route exact path="/global-search" component={Profiles} />
+            <Route exact path="/categories" component={Categories} />
+            <Route exact path="/global-search" component={ProfilesNew} />
+
             <Switch>
-              <PrivateRoute exact path="/dashboard" component={Dashboard} />
+              <PrivateRoute exact path="/dashboard" component={Profile} />
             </Switch>
+
+            <Switch>
+              <PrivateRoute exact path="/messanger" component={Messanger} />
+            </Switch>
+
+            <Switch>
+              <PrivateRoute
+                exact
+                path="/transactions"
+                component={Transactions}
+              />
+            </Switch>
+
+            <Switch>
+              <PrivateRoute exact path="/favorites" component={Favorites} />
+            </Switch>
+
             <Switch>
               <PrivateRoute
                 exact
@@ -61,6 +86,7 @@ class App extends Component {
                 component={CreateProfile}
               />
             </Switch>
+
             <Switch>
               <PrivateRoute
                 exact
@@ -68,6 +94,7 @@ class App extends Component {
                 component={EditProfile}
               />
             </Switch>
+
             <Footer />
           </div>
         </Router>
