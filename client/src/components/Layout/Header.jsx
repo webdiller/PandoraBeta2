@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, } from 'react';
 import { Link } from 'react-router-dom';
 import Omnibox from '../omnibox/Omnibox';
 // import HeaderProfile from '../HeaderProfile';
@@ -8,6 +8,8 @@ import HeaderProfile from './HeaderProfile';
 
 function Header() {
 
+    const [search, setSearch] = useState(true);
+    console.log(search);
 
     const Logo = () => {
         return (
@@ -31,10 +33,14 @@ function Header() {
     const Navigation = () => {
         return (
             <nav className="navigation">
-                <Link to="/global-search" className="navigation__item navigation__item--active">
+                <Link to="/global-search" className={search ? "navigation__item navigation__item--active" : "navigation__item"}
+                    onClick={() => setSearch(true)} 
+                >
                     <span className="navigation__link">Поиск</span>
                 </Link>
-                <Link to="/categories" className="navigation__item">
+                <Link to="/categories" className={(!search) ? "navigation__item navigation__item--active" : "navigation__item"}
+                    onClick={() => setSearch(false)} 
+                >
                     <span className="navigation__link">Все разделы</span>
                 </Link>
             </nav>
@@ -52,7 +58,7 @@ function Header() {
                 <Logo />
                 <Omnibox />
                 <div className="header__bar">
-                    <HeaderProfile/>
+                    <HeaderProfile />
                 </div>
             </div>
 
