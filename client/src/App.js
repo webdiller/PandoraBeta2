@@ -71,7 +71,6 @@ class App extends Component {
             <Loader active={this.state.active} />
 
             <Header />
-            <Navbar />
             {/* <Route exact path="/login" component={Login} /> */}
             <Route exact path="/login" component={Welcome} />
             <Route exact path="/categories" component={Categories} />
