@@ -5,34 +5,67 @@ import Spinner from "../common/Spinner";
 import ProfileItem from "./ProfileItem";
 import { getProfiles } from "../../actions/profileActions";
 import './Results.sass'
+import AdvancedSearch from "../AdvancedSearch/AdvancedSearch";
 
 class ProfilesNew extends Component {
 
   constructor(props) {
     super(props);
-    this.state = { newUsers: [] };
+    this.state = {
+      handle: '',
+      searchTags: [],
+      searchTime: 0,
+      searchRating: 0,
+      searchCity: '',
+      searchDeposit: [50000],
+      searchGuarantor: false,
+      searchVisa: true,
+      searchYandex: false,
+      searchBitcoin: true,
+      searchQiwi: false,
+      allProfiles: [],
+      filteredProfiles: []
+    };
   }
 
   componentDidMount() {
     this.props.getProfiles();
+    fetch('/api/profile/all')
+      .then(data => data.json())
+      .then(data => (
+        this.setState({ allProfiles: data }),
+        this.setState({ filteredProfiles: data })
+      ))
+  }
+
+  onChange = e => {
+    this.setState({ [e.target.name]: e.target.value })
+  }
+
+  onChangeTags = (value) => {
+    let searchTags = [];
+    value.map(item=>{
+      searchTags.push(item.value)
+    });
+    this.setState({searchTags: searchTags});
+  }
+
+  onFilter() {
+    let filteredProfiles = [];
+
+    for (let item of this.state.allProfiles) {
+      for (let item2 of item.services) {
+        if (item2.categories.some(i => this.state.searchTags.includes(i))) {
+          filteredProfiles.push(item)
+        }
+      }
+    } 
+
+    this.setState({filteredProfiles: filteredProfiles})
+
   }
 
   render() {
-    const { profiles, loading } = this.props.profile;
-    let profileItems;
-
-    if (profiles === null || loading) {
-      profileItems = <Spinner />;
-    } else {
-      if (profiles.length > 0) {
-        console.log(profiles);
-        profileItems = profiles.map((profile) => (
-          <ProfileItem key={profile._id} profile={profile} />
-        ));
-      } else {
-        profileItems = <h4>No profiles found...</h4>;
-      }
-    }
 
     return (
       <div className="profiles">
@@ -40,10 +73,28 @@ class ProfilesNew extends Component {
           <div className="row">
             <div className="col-md-12">
 
-            <div className="results__top">
+              <AdvancedSearch
+                handle={this.state.handle}
+                searchTags={this.state.searchTags}
+                searchTime={this.state.searchTime}
+                searchRating={this.state.searchRating}
+                searchCity={this.state.searchCity}
+                searchDeposit={this.state.searchDeposit}
+                searchGuarantor={this.state.searchGuarantor}
+                searchVisa={this.state.searchVisa}
+                searchYandex={this.state.searchYandex}
+                searchBitcoin={this.state.searchBitcoin}
+                searchQiwi={this.state.searchQiwi}
+
+                onChange={this.onChange.bind(this)}
+                onChangeTags={this.onChangeTags.bind(this)}
+                onFilter={this.onFilter.bind(this)}
+              />
+
+              <div className="results__top">
                 <p className="results__title">Найдено 2 исполнителя:</p>
                 <p className="results__value">проверка репутации застройщика</p>
-            </div>
+              </div>
 
               <div className="results__table-wrapper">
                 <div className="results__table">
@@ -59,7 +110,11 @@ class ProfilesNew extends Component {
                     <div className="results__col results__col_header results__col_contact"></div>
                   </div>
                   <div className="results__body">
-                    {profileItems}
+                    {this.state.filteredProfiles &&
+                      this.state.filteredProfiles.map((profile) => (
+                        <ProfileItem key={profile._id} profile={profile} />
+                      ))
+                    }
                   </div>
                 </div>
               </div>

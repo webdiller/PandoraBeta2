@@ -1,15 +1,14 @@
 import React, { Component } from 'react';
-import Results from '../Results/Results';
 
 import { Range, getTrackBackground } from 'react-range';
 import Select from 'react-dropdown-select';
 
 import './AdvancedSearch.sass'
 
-import bitcoin from '../../../images/bitcoin.png';
-import qiwi from '../../../images/qiwi.png';
-import visa from '../../../images/visa.png';
-import yandex from '../../../images/yandex-money.png';
+import bitcoin from '../../assets/images/bitcoin.png';
+import qiwi from '../../assets/images/qiwi.png';
+import visa from '../../assets/images/visa.png';
+import yandex from '../../assets/images/yandex-money.png';
 
 const options_location = [
 	{ value: 'Любой', label: 'Любой', },
@@ -24,6 +23,11 @@ const options_location = [
 ];
 
 const options_tags = [
+	{ value: 'cat3', label: 'cat3', },
+	{ value: ' cat4', label: 'cat4', },
+	{ value: 'cat2', label: 'cat2', },
+	{ value: 'cat1', label: 'cat1', },
+	{ value: 'asdasd', label: 'asdasd', },
 	{ value: 'Международное право', label: 'Международное право', },
 	{ value: 'Уголовное право', label: 'Уголовное право' },
 	{ value: 'Арбитражный суд', label: 'Арбитражный суд' },
@@ -38,36 +42,27 @@ export default class AdvancedSearch extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			activeSearch: false,
 			searchTags: [],
-			searchTime: 0,
-			searchRating: 0,
-			searchCity: '',
-			searchDeposit: [50000],
-			searchGuarantor: false,
-			searchVisa: true,
-			searchYandex: false,
-			searchBitcoin: false,
-			searchQiwi: false,
 		}
-
-		this.handleActiveSearch = this.handleActiveSearch.bind(this);
-
 	}
 
-	handleActiveSearch() { this.setState({ activeSearch: !this.state.activeSearch }) }
+	onFilter = () => {
+		this.props.onFilter()
+	}
 
+	onChange = (e) => {
+        this.props.onChange(e)
+	}
 
-	handleChange = (e) => {
-		e.preventDefault();
-		console.log(this.state);
-	};
-
+	onChangeTags = (value) => {
+        this.props.onChangeTags( value)
+	}
+	
 	render() {
 
 		return (
 			<div>
-				<form onSubmit={this.handleChange} className="advanced-search" >
+				<form className="advanced-search" >
 
 					<p className="advanced-search__title">Расширенный поиск</p>
 
@@ -76,14 +71,14 @@ export default class AdvancedSearch extends Component {
 						<label className="advanced-search__label">Категории</label>
 						<div className="advanced-search__direction-wrapper">
 
-							<Select
+						<Select
 								multi
 								color="#fc171e"
 								options={options_tags}
 								values={[]}
 								placeholder=""
 								onChange={(value) =>
-									this.setState({ searchTags: value })
+									this.onChangeTags(value)
 								}
 							/>
 
@@ -97,25 +92,25 @@ export default class AdvancedSearch extends Component {
 						<div className="advanced-search__input-buttons">
 
 							<div className="advanced-search__input-group">
-								<input onChange={(e) => { this.setState({ searchTime: e.target.value }) }} defaultValue="2" id="registration_term_1" name="registration_term" type="radio"
+								<input defaultValue="2" id="registration_term_1" name="registration_term" type="radio"
 									className="advanced-search__input-button" />
 								<label className="advanced-search__input-label" htmlFor="registration_term_1">От 2 лет</label>
 							</div>
 
 							<div className="advanced-search__input-group">
-								<input onChange={(e) => { this.setState({ searchTime: e.target.value }) }} defaultValue="1" defaultChecked id="registration_term_2" name="registration_term" type="radio"
+								<input defaultValue="1" defaultChecked id="registration_term_2" name="registration_term" type="radio"
 									className="advanced-search__input-button" />
 								<label className="advanced-search__input-label" htmlFor="registration_term_2">От года</label>
 							</div>
 
 							<div className="advanced-search__input-group">
-								<input onChange={(e) => { this.setState({ searchTime: e.target.value }) }} defaultValue="0.5" id="registration_term_3" name="registration_term" type="radio"
+								<input defaultValue="0.5" id="registration_term_3" name="registration_term" type="radio"
 									className="advanced-search__input-button" />
 								<label className="advanced-search__input-label" htmlFor="registration_term_3">От 0.5 года</label>
 							</div>
 
 							<div className="advanced-search__input-group">
-								<input onChange={(e) => { this.setState({ searchTime: e.target.value }) }} defaultValue="0" id="registration_term_4" name="registration_term" type="radio"
+								<input defaultValue="0" id="registration_term_4" name="registration_term" type="radio"
 									className="advanced-search__input-button" />
 								<label className="advanced-search__input-label" htmlFor="registration_term_4">Не важно</label>
 							</div>
@@ -130,11 +125,11 @@ export default class AdvancedSearch extends Component {
 							<div className="star-rating">
 								<div className="star-rating__wrap">
 									<div className="rating">
-										<input onChange={(e) => { this.setState({ searchRating: e.target.value }) }} id="rating-5" type="radio" name="rating" defaultValue="5" /><label htmlFor="rating-5"><i className="fas fa-star"></i></label>
-										<input onChange={(e) => { this.setState({ searchRating: e.target.value }) }} id="rating-4" type="radio" name="rating" defaultValue="4" /><label htmlFor="rating-4"><i className="fas fa-star"></i></label>
-										<input onChange={(e) => { this.setState({ searchRating: e.target.value }) }} id="rating-3" type="radio" name="rating" defaultValue="3" /><label htmlFor="rating-3"><i className="fas fa-star"></i></label>
-										<input onChange={(e) => { this.setState({ searchRating: e.target.value }) }} id="rating-2" type="radio" name="rating" defaultValue="2" /><label htmlFor="rating-2"><i className="fas fa-star"></i></label>
-										<input onChange={(e) => { this.setState({ searchRating: e.target.value }) }} id="rating-1" type="radio" name="rating" defaultValue="1" /><label htmlFor="rating-1"><i className="fas fa-star"></i></label>
+										<input id="rating-5" type="radio" name="rating" defaultValue="5" /><label htmlFor="rating-5"><i className="fas fa-star"></i></label>
+										<input id="rating-4" type="radio" name="rating" defaultValue="4" /><label htmlFor="rating-4"><i className="fas fa-star"></i></label>
+										<input id="rating-3" type="radio" name="rating" defaultValue="3" /><label htmlFor="rating-3"><i className="fas fa-star"></i></label>
+										<input id="rating-2" type="radio" name="rating" defaultValue="2" /><label htmlFor="rating-2"><i className="fas fa-star"></i></label>
+										<input id="rating-1" type="radio" name="rating" defaultValue="1" /><label htmlFor="rating-1"><i className="fas fa-star"></i></label>
 									</div>
 								</div>
 							</div>
@@ -149,9 +144,9 @@ export default class AdvancedSearch extends Component {
 								options={options_location}
 								values={[]}
 								placeholder="Любой "
-								onChange={(value) => {
-									this.setState({ searchCity: value[0].value })
-								}}
+							// onChange={(value) => {
+							// 	this.setState({ searchCity: value[0].value })
+							// }}
 							/>
 						</div>
 					</div >
@@ -161,8 +156,8 @@ export default class AdvancedSearch extends Component {
 						<p className="advanced-search__label">Депозит</p>
 						<div className="advanced-search__range-wrapper">
 
-							<Range
-								values={this.state.searchDeposit}
+							{/* <Range
+								values={this.props.searchDeposit}
 								step={STEP}
 								min={MIN}
 								max={MAX}
@@ -235,7 +230,7 @@ export default class AdvancedSearch extends Component {
 										/>
 									</div>
 								)}
-							/>
+							/> */}
 
 						</div>
 					</div >
@@ -244,7 +239,7 @@ export default class AdvancedSearch extends Component {
 					< div className="advanced-search__group advanced-search__group_garant" >
 						<p className="advanced-search__label advanced-search__label_garant">Работа через гарант сервис</p>
 						<div className="advanced-search__custom-input-wrapper">
-							<input onChange={(e) => { this.setState({ searchGuarantor: !this.state.searchGuarantor }) }} checked={this.state.searchGuarantor} className="advanced-search__custom-input" type="checkbox" id="liveSearchGarant" />
+							<input defaultChecked={this.props.searchGuarantor} className="advanced-search__custom-input" type="checkbox" id="liveSearchGarant" />
 							<label className="advanced-search__custom-label" htmlFor="liveSearchGarant"></label>
 						</div>
 					</div >
@@ -256,9 +251,7 @@ export default class AdvancedSearch extends Component {
 
 							{/* Visa */}
 							<input
-								onChange={(e) => { this.setState({ searchVisa: !this.state.searchVisa }) }}
-								checked={this.state.searchVisa}
-								defaultValue="visa"
+								defaultChecked={this.props.searchVisa}
 								name="payment"
 								className="advanced-search__custom-input advanced-search__custom-input_payment"
 								type="checkbox"
@@ -270,9 +263,7 @@ export default class AdvancedSearch extends Component {
 
 							{/* Bitcoin */}
 							<input
-								onChange={(e) => { this.setState({ searchBitcoin: !this.state.searchBitcoin }) }}
-								checked={this.state.searchBitcoin}
-								defaultValue="bitcoin"
+								defaultChecked={this.props.searchBitcoin}
 								name="payment"
 								className="advanced-search__custom-input advanced-search__custom-input_payment"
 								type="checkbox"
@@ -284,9 +275,7 @@ export default class AdvancedSearch extends Component {
 
 							{/* Qiwi */}
 							<input
-								onChange={(e) => { this.setState({ searchQiwi: !this.state.searchQiwi }) }}
-								checked={this.state.searchQiwi}
-								defaultValue="qiwi"
+								defaultChecked={this.props.searchQiwi}
 								name="payment"
 								className="advanced-search__custom-input advanced-search__custom-input_payment"
 								type="checkbox"
@@ -298,9 +287,7 @@ export default class AdvancedSearch extends Component {
 
 							{/* Yandex */}
 							<input
-								onChange={(e) => { this.setState({ searchYandex: !this.state.searchYandex }) }}
-								checked={this.state.searchYandex}
-								defaultValue="yandex"
+								defaultChecked={this.props.searchYandex}
 								name="payment"
 								className="advanced-search__custom-input advanced-search__custom-input_payment"
 								type="checkbox"
@@ -314,12 +301,11 @@ export default class AdvancedSearch extends Component {
 					</div >
 
 					<div className="advanced-search__btn-wrapper">
-						<button className="advanced-search__btn-submit site-btn site-btn_red site-btn_s2 mx-auto">Найти
+						<button onClick={e => this.onFilter()} type="button" className="advanced-search__btn-submit site-btn site-btn_red site-btn_s2 mx-auto">Найти
 					</button>
 					</div>
 
 				</form >
-				<Results />
 			</div>
 		);
 	}
