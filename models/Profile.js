@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-const { text } = require("body-parser");
 const Schema = mongoose.Schema;
 
 // Create Schema
@@ -9,7 +8,7 @@ const ProfileSchema = new Schema({
     ref: "users",
   },
   onlineUser: {
-    type: String,
+    type: Boolean,
   },
   handle: {
     type: String,
@@ -28,11 +27,8 @@ const ProfileSchema = new Schema({
         min: 30,
       },
       categories: {
-        type: [String],
-        required: true,
-        subcategory: {
-          type: [String],
-        },
+        type: Schema.Types.ObjectId,
+        ref: "categories",
         date: {
           type: Date,
           default: Date.now,
@@ -41,20 +37,28 @@ const ProfileSchema = new Schema({
     },
   ],
   guarantor_service: {
-    type: String,
+    type: Boolean,
   },
   payment_methods: {
     visa: {
-      type: String,
+      type: Boolean,
     },
     bitcoin: {
-      type: String,
+      type: Boolean,
     },
     qiwi: {
-      type: String,
+      type: Boolean,
     },
     yandex: {
-      type: String,
+      type: Boolean,
+    },
+  },
+  city: {
+    type: Schema.Types.ObjectId,
+    ref: "cities",
+    date: {
+      type: Date,
+      default: Date.now,
     },
   },
 });

@@ -3,20 +3,22 @@ const bodyParser = require("body-parser");
 const passport = require("passport");
 require("dotenv").config();
 const mongoose = require("mongoose");
+const cors = require("cors");
 
 // Connect Routes To App
 const users = require("./routes/api/users");
 const profile = require("./routes/api/profile");
-const ChatCtrl = require("./routes/api/chat");
-const MessageCtrl = require("./routes/api/message");
+const category = require("./routes/api/category");
+const city = require("./routes/api/city");
 
 // Import Sockets
-const { createSocket } = require("./socket");
 
 // Initialize App
 const app = express();
 const server = require("http").Server(app);
-const io = createSocket(server);
+const socket = require("socket.io")(server);
+
+const socketConnection = require("./socket");
 
 // Connect to MongoDB
 mongoose
@@ -28,12 +30,15 @@ mongoose
   })
   .then(() => {
     console.log("Connected to MongoDB Successfully!");
+
+    socket.on("connection", socketConnection);
   })
   .catch((err) => console.log(`Error: ${err}`));
 
 // Middlewares App
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+app.use(cors());
 
 // Passport Middleware
 app.use(passport.initialize());
@@ -44,41 +49,17 @@ require("./config/passport")(passport);
 // Use Routes
 app.use("/api/users", users);
 app.use("/api/profile", profile);
+app.use("/api/category", category);
+app.use("/api/city", city);
 
-const ChatController = new ChatCtrl(io);
-const MessageController = new MessageCtrl(io);
+// Connected cors
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static("client/build"));
 
-app.get(
-  "/api/chats",
-  passport.authenticate("jwt", { session: false }),
-  ChatController.index
-);
-app.delete(
-  "/api/chats/:id",
-  passport.authenticate("jwt", { session: false }),
-  ChatController.delete
-);
-app.post(
-  "/api/chats",
-  passport.authenticate("jwt", { session: false }),
-  ChatController.create
-);
-
-app.get(
-  "/api/messages",
-  passport.authenticate("jwt", { session: false }),
-  MessageController.index
-);
-app.post(
-  "/api/messages",
-  passport.authenticate("jwt", { session: false }),
-  MessageController.create
-);
-app.delete(
-  "/api/messages",
-  passport.authenticate("jwt", { session: false }),
-  MessageController.delete
-);
+  app.use("*", (req, res) =>
+    res.sendFile(path.join(__dirname, "client", "build", "index.html"))
+  );
+}
 
 // Connect to Server and Initialize port
 const port = process.env.PORT || 5000;
