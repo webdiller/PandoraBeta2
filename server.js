@@ -10,6 +10,7 @@ const users = require("./routes/api/users");
 const profile = require("./routes/api/profile");
 const category = require("./routes/api/category");
 const city = require("./routes/api/city");
+const chat = require("./routes/api/chat");
 
 // Import Sockets
 
@@ -51,6 +52,7 @@ app.use("/api/users", users);
 app.use("/api/profile", profile);
 app.use("/api/category", category);
 app.use("/api/city", city);
+app.use("/api/chat", chat);
 
 // Connected cors
 if (process.env.NODE_ENV === "production") {
