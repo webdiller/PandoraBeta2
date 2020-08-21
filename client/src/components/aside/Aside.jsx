@@ -51,7 +51,7 @@ export default function Aside() {
         className="aside__item aside__item_icon"
         activeClassName="aside__item_active"
         exact
-        to="/profile"
+        to="/dashboard"
       >
         <i className="fas fa-user-circle"></i>
       </NavLink>
