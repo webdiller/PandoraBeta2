@@ -4,23 +4,27 @@ import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { addEducation } from "../../actions/profileActions";
+import Axios from 'axios';
 
 const AddService2 = () => {
+    const [categories, setCategories] = useState();
+
+    React.useEffect(() => {
+        let arr = [];
+        const getData = async () => {
+            return await Axios('http://localhost:5000/api/category')
+        }
+        getData()
+            .then(data => data.data.map(item => arr.push({ label: item.name, value: item.name })))
+            .then(setCategories(arr))
+    }, [])
 
     const [formData, setFormData] = useState({
         title: '',
         description: '',
         category: '',
-      });
-      
-      const [categories, setCategories] = useState([
-        { value: 'ПРОБИВ ПО НЕДВИЖИМОСТИ', label: 'ПРОБИВ ПО НЕДВИЖИМОСТИ' },
-        { value: 'ПРОБИВ ПО ГИБДД', label: 'ПРОБИВ ПО ГИБДД' },
-        { value: 'ПРОБИВ ПО ПРФ', label: 'ПРОБИВ ПО ПРФ' },
-        { value: 'ПРОБИВ ПО МВД', label: 'ПРОБИВ ПО МВД' },
-        { value: 'ПРОБИВ ПО СОТОВЫМ ОПЕРАТОРАМ', label: 'ПРОБИВ ПО СОТОВЫМ ОПЕРАТОРАМ' },
-        { value: 'ПРОБИВ ПО ФСПП', label: 'ПРОБИВ ПО ФСПП' }
-      ]);
+    });
+
 
     const onChange = e => {
         e.preventDefault();
@@ -64,14 +68,13 @@ AddService2.propTypes = {
     addEducation: PropTypes.func.isRequired,
     profile: PropTypes.object.isRequired,
     errors: PropTypes.object.isRequired,
-  };
-  
-  const mapStateToProps = (state) => ({
+};
+
+const mapStateToProps = (state) => ({
     profile: state.profile,
     errors: state.errors,
-  });
-  
-  export default connect(mapStateToProps, { addEducation })(
+});
+
+export default connect(mapStateToProps, { addEducation })(
     withRouter(AddService2)
-  );
-  
+);
