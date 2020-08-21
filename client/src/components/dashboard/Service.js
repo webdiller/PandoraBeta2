@@ -15,36 +15,36 @@ class Service extends Component {
     //   <div>Null</div>;
     // } else {
     const services = this.props.services.map((s) => (
-      <tr key={s._id}>
-        <td>{s.title}</td>
-        <td>{s.categories}</td>
-        <td>{s.content}</td>
-        <td>
+      <div key={s._id}>
+        <h1>{s.title}</h1>
+        <p>{s.categories}</p>
+        <h4>{s.content}</h4>
+        <div>
           <button
             onClick={this.onDeleteClick.bind(this, s._id)}
             className="btn btn-danger"
           >
-            Удалить
+            x
           </button>
-        </td>
-      </tr>
+        </div>
+      </div>
     ));
     // }
 
     return (
       <div>
         <h4 className="mb-4">Услуги</h4>
-        <table className="table">
-          <thead>
-            <tr>
-              <th>Название услуги</th>
-              <th>Категории</th>
-              <th>Описание услуги</th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody>{services}</tbody>
-        </table>
+        <div className="table">
+          <div>
+            <div>
+              <p>Название услуги</p>
+              <p>Категории</p>
+              <p>Описание услуги</p>
+              <p></p>
+            </div>
+          </div>
+          <div>{services}</div>
+        </div>
       </div>
     );
   }

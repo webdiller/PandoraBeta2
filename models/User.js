@@ -23,6 +23,15 @@ const UserSchema = new Schema({
     type: Date,
     default: new Date(),
   },
+  privateKeyCipher: {
+    type: String,
+  },
+  publicKey: {
+    type: String,
+  },
+  pbkHash: {
+    type: String,
+  },
   role: 0,
 });
 
