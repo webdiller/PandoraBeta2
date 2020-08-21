@@ -27,8 +27,8 @@ const ProfileSchema = new Schema({
         min: 30,
       },
       categories: {
-        type: Schema.Types.ObjectId,
-        ref: "categories",
+        type: [String],
+        required: true,
         date: {
           type: Date,
           default: Date.now,
