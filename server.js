@@ -10,16 +10,14 @@ const users = require("./routes/api/users");
 const profile = require("./routes/api/profile");
 const category = require("./routes/api/category");
 const city = require("./routes/api/city");
-const chat = require("./routes/api/chat");
+const chat = require("./routes/api/messages");
 
 // Import Sockets
 
 // Initialize App
 const app = express();
 const server = require("http").Server(app);
-const socket = require("socket.io")(server);
-
-const socketConnection = require("./socket");
+const io = require("socket.io").listen(server);
 
 // Connect to MongoDB
 mongoose
@@ -31,8 +29,6 @@ mongoose
   })
   .then(() => {
     console.log("Connected to MongoDB Successfully!");
-
-    socket.on("connection", socketConnection);
   })
   .catch((err) => console.log(`Error: ${err}`));
 
@@ -46,6 +42,12 @@ app.use(passport.initialize());
 
 // Passport Config
 require("./config/passport")(passport);
+
+// Assign socket object to every request
+app.use(function (req, res, next) {
+  req.io = io;
+  next();
+});
 
 // Use Routes
 app.use("/api/users", users);

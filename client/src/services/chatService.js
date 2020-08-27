@@ -1,45 +1,73 @@
 import axios from "axios";
+import { useSnackbar } from "notistack";
 
-const apiEndpoint =
-  process.env.REACT_APP_SERVICE_API || "http://localhost:5000/api";
-const serviceEndpoint = apiEndpoint + "/chats";
-
-export const getChats = async (channel, limit, config) => {
-  const query = `limit=${limit}`;
+export function useGetConversations() {
+  const { enqueueSnackbar } = useSnackbar();
   const token = localStorage.getItem("jwtToken");
+  const config = {};
   config["headers"] = {
     Authorization: token,
   };
 
-  return await axios.get(`${serviceEndpoint}/${channel}?${query}`, config);
-};
-
-export async function sendChat(msgObj, config) {
-  const token = localStorage.getItem("jwtToken");
-  config["headers"] = {
-    Authorization: token,
+  const getConversations = () => {
+    return axios
+      .get(`${process.env.REACT_APP_API_URL}/api/chat/conversations`, config)
+      .catch((err) => {
+        enqueueSnackbar("Could not load chats", {
+          variant: "error",
+        });
+      });
   };
 
-  return await axios.post(serviceEndpoint, msgObj, config);
+  return getConversations;
 }
 
-export async function getPrivateChannels(pbkHash, config) {
+export function useGetConversationMessages() {
+  const { enqueueSnackbar } = useSnackbar();
   const token = localStorage.getItem("jwtToken");
+  const config = {};
   config["headers"] = {
     Authorization: token,
   };
 
-  return await axios.get(
-    `${serviceEndpoint}/privateChannels/${pbkHash}`,
-    config
-  );
+  const getConversationMessages = (id) => {
+    return axios
+      .get(
+        `${process.env.REACT_APP_API_URL}/api/chat/converastions/query?userId=${id}`,
+        config
+      )
+      .catch((err) => {
+        enqueueSnackbar("Could not load chats", {
+          variant: "error",
+        });
+      });
+  };
+
+  return getConversationMessages;
 }
 
-export async function seenChat(chatId, config) {
+export function useSendConversationMessage() {
+  const { enqueueSnackbar } = useSnackbar();
   const token = localStorage.getItem("jwtToken");
+  const config = {};
   config["headers"] = {
     Authorization: token,
   };
+  const requestOptions = {
+    config,
+    body: JSON.stringify({ to: id, body: body }),
+  };
 
-  return await axios.put(`${serviceEndpoint}/seen/${chatId}`, {}, config);
+  const sendConversationMessage = (id, body) => {
+    return axios
+      .post(`${process.env.REACT_APP_API_URL}/api/chat`, requestOptions)
+      .catch((err) => {
+        console.log(err);
+        enqueueSnackbar("Could send message", {
+          variant: "error",
+        });
+      });
+  };
+
+  return sendConversationMessage;
 }

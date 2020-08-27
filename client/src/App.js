@@ -23,7 +23,6 @@ import EditProfile from "./components/edit-profile/EditProfile";
 import ProfilesNew from "./components/Profiles/ProfilesNew";
 import Transactions from "./components/dashboard/Transactions";
 import Favorites from "./components/dashboard/Favorites";
-import Messanger from "./components/messanger/Messanger";
 import Loader from "./components/loader/Loader";
 
 // Check for token
@@ -48,18 +47,17 @@ if (localStorage.jwtToken) {
 }
 
 class App extends Component {
-
-  constructor (props) {
+  constructor(props) {
     super(props);
     this.state = {
-      active: true
-    }
+      active: true,
+    };
   }
 
   componentDidMount() {
-    setTimeout(() =>{
-      this.setState({active: false})
-    },3000)
+    setTimeout(() => {
+      this.setState({ active: false });
+    }, 3000);
   }
 
   render() {
@@ -67,7 +65,6 @@ class App extends Component {
       <Provider store={store}>
         <Router>
           <div className="App">
-
             <Loader active={this.state.active} />
 
             <Header />
@@ -78,10 +75,6 @@ class App extends Component {
 
             <Switch>
               <PrivateRoute exact path="/dashboard" component={Profile} />
-            </Switch>
-
-            <Switch>
-              <PrivateRoute exact path="/messanger" component={Messanger} />
             </Switch>
 
             <Switch>

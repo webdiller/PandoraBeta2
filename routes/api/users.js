@@ -89,6 +89,7 @@ router.post("/login", (req, res) => {
         process.env.SECRET_OR_KEY,
         { expiresIn: 3600 },
         (err, token) => {
+          req.io.sockets.emit("users", user.name);
           res.json({
             success: true,
             token: "Bearer " + token,

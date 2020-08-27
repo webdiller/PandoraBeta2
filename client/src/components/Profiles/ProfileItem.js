@@ -1,11 +1,10 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { Link } from "react-router-dom";
 import isEmpty from "../../validation/is-empty";
 
 class ProfileItem extends Component {
   render() {
-    const { profile } = this.props;
+    const { profile, handleChannelOpen, currUser, user } = this.props;
 
     return (
       // <div className="card card-body bg-light mb-3">
@@ -40,9 +39,12 @@ class ProfileItem extends Component {
 
       <div className="results__content">
         <div className="results__col results__col_name">{profile.handle}</div>
-        <div className="results__col"><span className="results__col-city">Город</span>
+        <div className="results__col">
+          <span className="results__col-city">Город</span>
         </div>
-        <div className="results__col results__col_rating"><i className="results__col-star fas fa-star"></i>Рейтинг</div>
+        <div className="results__col results__col_rating">
+          <i className="results__col-star fas fa-star"></i>Рейтинг
+        </div>
         <div className="results__col results__col_center">0 руб.</div>
         <div className="results__col results__col_guarantor">
           {/* {checkGuarantor(props.guarantor)} */}
@@ -60,7 +62,12 @@ class ProfileItem extends Component {
           })} */}
         </div>
         <div className="results__col results__col_contact">
-          <Link to={`/messanger/${profile.handle}`} className="results__col-btn">Cвязаться</Link>
+          <button
+            onClick={() => handleChannelOpen(currUser, user)}
+            className="results__col-btn"
+          >
+            Cвязаться
+          </button>
         </div>
       </div>
     );
