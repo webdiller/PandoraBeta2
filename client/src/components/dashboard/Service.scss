@@ -9,6 +9,10 @@
     border: 1px solid #e2e2e2;
     &__item {
         position: relative;
+        margin-bottom: 30px;
+        &:last-child {
+            margin-bottom: 0;
+        }
     }
     &__title {
         font-size: 20px;

@@ -17,7 +17,7 @@ class Service extends Component {
     // } else {
 
     const services = this.props.services.map((s) => (
-      <div className="services__item mb-2" key={s._id}>
+      <div className="services__item" key={s._id}>
         <h1 className="services__title">Заголовок: {s.title}</h1>
         <h4 className="services__description">Описание: {s.content}</h4>
         <p className="services__categories">Категории: {s.categories}</p>
