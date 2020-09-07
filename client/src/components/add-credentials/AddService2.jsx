@@ -6,7 +6,7 @@ import PropTypes from "prop-types";
 import { addEducation } from "../../actions/profileActions";
 import Axios from 'axios';
 
-const AddService2 = () => {
+const AddService2 = (props) => {
     const [categories, setCategories] = useState();
 
     React.useEffect(() => {
@@ -21,10 +21,10 @@ const AddService2 = () => {
 
     const [formData, setFormData] = useState({
         title: '',
-        description: '',
-        category: '',
+        content: '',
+        categories: '',
+        categoriesArray: []
     });
-
 
     const onChange = e => {
         e.preventDefault();
@@ -34,12 +34,33 @@ const AddService2 = () => {
         })
     }
 
+    const onSubmit = (e) => {
+        e.preventDefault();
+
+        let newCategories = formData.categoriesArray;
+        newCategories = newCategories.map(item => {
+            return item.value
+        });
+        newCategories = newCategories.join();
+        console.log(newCategories);
+
+        const eduData = {
+            title: formData.title,
+            categories: formData.categories,
+            content: formData.content
+        };
+
+        // props.addEducation(eduData, props.history);
+    }
+
     return (
         <div className="profile__username">
             <p className="profile__username-title">Публикация услуги</p>
-            <form className="profile__form">
+            <form onSubmit={onSubmit} className="profile__form">
                 <input onChange={e => { onChange(e) }} name="title" type="text" placeholder="Название" className="profile__username-input" />
-                <input onChange={e => { onChange(e) }} name="description" type="text" placeholder="Описание" className="profile__username-input" />
+                <input onChange={e => { onChange(e) }} name="content" type="text" placeholder="Описание" className="profile__username-input" />
+                <input onChange={e => { onChange(e) }} name="categories" type="text" placeholder="Категория" className="profile__username-input" />
+
                 <div className="profile__select-wrapper">
                     <Select
                         multi={true}
@@ -50,14 +71,15 @@ const AddService2 = () => {
                         onChange={(value) => {
                             setFormData({
                                 ...formData,
-                                category: value[0].value
+                                categoriesArray: value
                             })
                         }}
                         placeholder="Категории"
                         value
                     />
                 </div>
-                <button type="button" className="profile__btn-submit site-btn site-btn_red site-btn_s3">Опубликовать услугу</button>
+
+                <button type="submit" className="profile__btn-submit site-btn site-btn_red site-btn_s3">Опубликовать услугу</button>
             </form>
         </div>
 
