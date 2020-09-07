@@ -12,15 +12,12 @@ class Service extends Component {
   }
 
   render() {
-    // if (this.props.services === null) {
-    //   <div>Null</div>;
-    // } else {
-
     const services = this.props.services.map((s) => (
       <div className="services__item" key={s._id}>
         <h1 className="services__title">Заголовок: {s.title}</h1>
         <h4 className="services__description">Описание: {s.content}</h4>
-        <p className="services__categories">Категории: {s.categories}</p>
+        <p className="services__categories">Категории: {s.categories.map((item, indx)=>(<span className="mr-2" key={indx}>{item}</span>))}
+      </p>
         <div>
           <button
             onClick={this.onDeleteClick.bind(this, s._id)}
@@ -28,7 +25,6 @@ class Service extends Component {
         </div>
       </div>
     ));
-    // }
 
     return (
       <div>

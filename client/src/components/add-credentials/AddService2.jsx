@@ -41,16 +41,17 @@ const AddService2 = (props) => {
         newCategories = newCategories.map(item => {
             return item.value
         });
+
         newCategories = newCategories.join();
-        console.log(newCategories);
 
         const eduData = {
             title: formData.title,
-            categories: formData.categories,
+            categories: newCategories,
             content: formData.content
         };
 
-        // props.addEducation(eduData, props.history);
+        props.addEducation(eduData, props.history);
+        window.location.reload(false);
     }
 
     return (
@@ -59,7 +60,6 @@ const AddService2 = (props) => {
             <form onSubmit={onSubmit} className="profile__form">
                 <input onChange={e => { onChange(e) }} name="title" type="text" placeholder="Название" className="profile__username-input" />
                 <input onChange={e => { onChange(e) }} name="content" type="text" placeholder="Описание" className="profile__username-input" />
-                <input onChange={e => { onChange(e) }} name="categories" type="text" placeholder="Категория" className="profile__username-input" />
 
                 <div className="profile__select-wrapper">
                     <Select
@@ -82,7 +82,6 @@ const AddService2 = (props) => {
                 <button type="submit" className="profile__btn-submit site-btn site-btn_red site-btn_s3">Опубликовать услугу</button>
             </form>
         </div>
-
     );
 };
 
