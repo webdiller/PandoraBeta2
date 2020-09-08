@@ -83,17 +83,6 @@ class Dashboard extends Component {
 
             </div>
 
-
-            {/* <Experience experience={profile.experience} />
-            <Education education={profile.education} /> */}
-            <button
-              className="fas fa-power-off btn btn-primary"
-              type="button"
-              data-toggle="modal"
-              data-target="#exampleModal2"
-              data-whatever="@mdo"
-            ></button>
-            <AddService />
             <AddService2 />
 
             <div className="profile__username">
