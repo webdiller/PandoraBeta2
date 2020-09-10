@@ -25,6 +25,8 @@ import Transactions from "./components/dashboard/Transactions";
 import Favorites from "./components/dashboard/Favorites";
 import Messanger from "./components/messanger/Messanger";
 import Loader from "./components/loader/Loader";
+import AllUsers from "./components/admin/AllUsers";
+import AllServices from "./components/admin/AllServices";
 
 // Check for token
 if (localStorage.jwtToken) {
@@ -71,6 +73,10 @@ class App extends Component {
             <Loader active={this.state.active} />
 
             <Header />
+
+            <Route exact path="/allusers" component={AllUsers} />
+            <Route exact path="/allservices" component={AllServices} />
+
             {/* <Route exact path="/login" component={Login} /> */}
             <Route exact path="/login" component={Welcome} />
             <Route exact path="/categories" component={Categories} />

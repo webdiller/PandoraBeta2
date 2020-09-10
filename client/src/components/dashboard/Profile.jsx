@@ -15,6 +15,7 @@ import AddService2 from "../add-credentials/AddService2";
 // import Education from './Education';
 
 class Dashboard extends Component {
+
   componentDidMount() {
     this.props.getCurrentProfile();
   }
@@ -38,6 +39,8 @@ class Dashboard extends Component {
           <div>
 
             <div className='profile__status'>
+
+              <div style={{width: '100%'}}>Роль: {profile.role}</div>
 
               <div className="profile__status-item">
                 <p className="profile__status-title">Личные сообщения:</p>
@@ -82,6 +85,7 @@ class Dashboard extends Component {
               </div>
 
             </div>
+
 
             <AddService2 />
 
