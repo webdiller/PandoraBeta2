@@ -1,12 +1,24 @@
-import React, { useState } from 'react';
-import customersData from './customers.json';
+import React, { useState, useEffect } from 'react';
 import Aside from "../aside/Aside";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
+import { getProfiles } from "../../actions/profileActions";
 import './Favorites.sass'
 
-export default function Favorites() {
+function Favorites(props) {
 
-    const [search, setSearch] = useState('');
-    const [customers, setCustomers] = useState(customersData);
+    const [profiles, setProfiles] = useState();
+
+    useEffect(() => {
+        props.getProfiles();
+        fetch('/api/profile/all')
+            .then(data => data.json())
+            .then(data => setProfiles(data)
+            )
+    }, []);
+
+    let currentCategories = new Set();
+
 
     return (
         <div className="favorites" >
@@ -27,68 +39,57 @@ export default function Favorites() {
 
                         <div className="favorites__list">
 
-                            { customers &&
-                                customers.map((item) => {
+                            {profiles ?
+                                profiles.map(item => (
+                                    <div key={item._id} className="favorites__item">
 
-                                    let {
-                                        name,
-                                        raiting,
-                                        deposit,
-                                        tags,
-                                        review,
-                                    } = item;
-
-                                    if (name.toLowerCase().includes(search)) {
-
-                                        return (
-                                            <div key={item.id} className="favorites__item">
-
-                                                <div className="favorites__profile">
-                                                    <div className="favorites__profile-img-wrapper">
-                                                        <img src="" alt="" className="favorites__profile-img" />
-                                                    </div>
-                                                    <p className="favorites__profile-name">{name}</p>
-                                                </div>
-
-                                                <div className="favorites__tags">
-                                                    {tags.map((item, index) => {
-                                                        return (
-                                                            <div key={index} className="favorites__tag">
-                                                                <p className="favorites__tags-name">{item.title}</p>
-                                                                <p className="favorites__tags-value">{item.data}</p>
-                                                            </div>
-                                                        )
-                                                    })}
-                                                </div>
-
-                                                <div className="favorites__deposit">
-                                                    <p className="favorites__deposit-name">Депозит</p>
-                                                    <p className="favorites__deposit-price">{deposit} руб.</p>
-                                                </div>
-
-                                                <div className="favorites__info">
-                                                    <div className="favorites__star">
-                                                        <i className="favorites__star-icon fas fa-star"></i>
-                                                        <span className="favorites__star-value">{raiting}</span>
-                                                    </div>
-                                                    <div className="favorites__shield">
-                                                        <i className="favorites__shield-icon fas fa-shield-alt"></i>
-                                                    </div>
-                                                </div>
-
-                                                <div className="favorites__comment-filed">
-                                                    <input id={item.id} defaultValue={review} className="favorites__comment-area"></input>
-                                                </div>
-
-                                                <div className="favorites__comment-wrapper">
-                                                    <button className="site-btn site-btn_red site-btn_s1 mr-2">Сохранить</button>
-                                                </div>
-
+                                        <div className="favorites__profile">
+                                            <div className="favorites__profile-img-wrapper">
+                                                <img src="" alt="" className="favorites__profile-img" />
                                             </div>
-                                        )
-                                    }
-                                    return true;
-                                })
+                                            <p className="favorites__profile-name">{item.handle}</p>
+                                        </div>
+
+                                        <div className="favorites__tags">
+                                            <div className="favorites__tag">
+                                                <p className="favorites__tags-name">Категории: </p>
+                                                <p className="favorites__tags-value">
+                                                    {/* {item.services?.map(item => {
+                                                        innerItem.categories?.map(item => {
+                                                            currentCategories.add(innerSecondItem)
+                                                        })
+                                                    })
+                                                    } */}
+                                                </p>
+                                            </div>
+                                        </div>
+
+                                        <div className="favorites__deposit">
+                                            <p className="favorites__deposit-name">Депозит</p>
+                                            <p className="favorites__deposit-price">0 руб.</p>
+                                        </div>
+
+                                        <div className="favorites__info">
+                                            <div className="favorites__star">
+                                                <i className="favorites__star-icon fas fa-star"></i>
+                                                <span className="favorites__star-value">5</span>
+                                            </div>
+                                            <div className="favorites__shield">
+                                                <i className="favorites__shield-icon fas fa-shield-alt"></i>
+                                            </div>
+                                        </div>
+
+                                        <div className="favorites__comment-filed">
+                                            <input defaultValue="Отзыв" className="favorites__comment-area"></input>
+                                        </div>
+
+                                        <div className="favorites__comment-wrapper">
+                                            <button className="site-btn site-btn_red site-btn_s1 mr-2">Сохранить</button>
+                                        </div>
+                                    </div>
+                                ))
+                                :
+                                null
                             }
                         </div>
 
@@ -96,8 +97,19 @@ export default function Favorites() {
 
                 </div>
             </div>
-        
+
         </div>
-    
+
     );
 }
+
+Favorites.propTypes = {
+    getProfiles: PropTypes.func.isRequired,
+    profile: PropTypes.object.isRequired,
+};
+
+const mapStateToProps = (state) => ({
+    profile: state.profile,
+});
+
+export default connect(mapStateToProps, { getProfiles })(Favorites);

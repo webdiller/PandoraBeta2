@@ -108,7 +108,7 @@ router.post(
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
     const { errors, isValid } = validateProfileInput(req.body);
-
+    console.log(1);
     // Chack Validation
     if (!isValid) {
       // return any errors with 400 status

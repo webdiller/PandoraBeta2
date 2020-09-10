@@ -25,7 +25,7 @@ export default function LiveSearch(props) {
                     </ul>
                     <div className="live-search__help">
                         <p className="live-search__help-text">Не найшли исполнителей?</p>
-                        <Link to="/profile" className="live-search__help-link">Создайте заявку</Link>
+                        <Link to="/dashboard" className="live-search__help-link">Создайте заявку</Link>
                     </div>
                 </div>
             </div>

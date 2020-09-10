@@ -92,8 +92,8 @@ class ProfilesNew extends Component {
               />
 
               <div className="results__top">
-                <p className="results__title">Найдено 2 исполнителя:</p>
-                <p className="results__value">проверка репутации застройщика</p>
+                {/* <p className="results__title">Найдено 2 исполнителя:</p>
+                <p className="results__value">проверка репутации застройщика</p> */}
               </div>
 
               <div className="results__table-wrapper">

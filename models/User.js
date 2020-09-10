@@ -32,7 +32,10 @@ const UserSchema = new Schema({
   pbkHash: {
     type: String,
   },
-  role: 0,
+  role: {
+    type: Number,
+    default: 0
+  }
 });
 
 module.exports = User = mongoose.model("users", UserSchema);

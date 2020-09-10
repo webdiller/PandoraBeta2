@@ -1,0 +1,34 @@
+@import "../../styles/mixins.scss";
+@import "../../styles/variables.scss";
+
+.services {
+    display: flex;
+    flex-direction: column;
+    padding: 15px;
+    border-radius: 10px;
+    border: 1px solid #e2e2e2;
+    &__item {
+        position: relative;
+        margin-bottom: 30px;
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+    &__title {
+        font-size: 20px;
+    }
+    &__description {
+        font-size: 20px;
+    }
+    &__categories {
+    }
+    &__delete {
+        position: absolute;
+        top: -5px;
+        right: -55px;
+        border: none;
+        outline: none;
+        background: transparent;
+        font-size: 20px;
+    }
+}
